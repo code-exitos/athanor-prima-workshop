@@ -56,4 +56,4 @@ Fill the template. Code personas `P-1`, `P-2`, ... in order. Set **Confidence** 
 After the user agrees, write `.athanor/context/business/personas.md` with the front matter `Status: Draft` (no other front matter keys: the Athanor format has one). Set `Status: Approved` only after the user says explicitly that they approve. Offer to run `git add` and `git commit` (message: `docs: add personas`). Never push.
 
 ### 7. Wrap up
-Summarize the decisions and assumptions, and what this unlocks next. Say: "To go on, commit this file, run `git switch checkpoint-2`, then ask me: lets spec the issues for feature 3." Note that checkpoint-2 already has its own approved personas, so this step was practice.
+Summarize the decisions and assumptions, and what this unlocks next. Say: "To go on, ask me: Commit my changes and switch to checkpoint 2. Then ask me: lets spec the issues for feature 3." When the user asks, commit the personas file and switch branch yourself (`git add`, `git commit`, `git switch`). Never push. Note that checkpoint-2 already has its own approved personas, so this step was practice.
