@@ -13,12 +13,29 @@ A resident creates a pass. The app signs it and shows a QR code that holds a lin
 3. Set **Owner** to your account, name it `prima-access`, choose **Private**, and **tick "Include all branches."** Click **Create repository**.
 4. In your new repo, click **Code → Codespaces → Create codespace on checkpoint-1**. Wait 1 to 2 minutes.
 5. In the terminal run `bash scripts/workshop-check.sh` and fix any ✘ it shows. Then type `claude` and log in with your Claude account.
-6. Type the three prompts, in order:
-   1. `Use the Athanor workshop skill to draft the personas document.`
-   2. Commit your personas (`git add -A && git commit -m "docs: personas"`), run `git switch checkpoint-2`, then type: `Use the Athanor workshop skill to spec the feature "Guard verifies a pass from the QR link".`
-   3. `Use the Athanor workshop skill to work the feature "Guard verifies a pass from the QR link".`
+6. Talk to Claude in plain words. Three prompts, in order (see **Moving between checkpoints** for the switch):
+   1. On `checkpoint-1`: `Help me draft the user personas document.`
+   2. On `checkpoint-2`: `Lets spec the issues for feature 3.`
+   3. On `checkpoint-2`: `Work on the issue for feature 3.`
+
+   Claude drafts and asks. You decide. It shows you each document, issue and pull request, and waits for your yes before it creates anything.
 7. To see the app: `npm install && npm run dev`, then click **Open in Browser** (Ports tab → globe icon if you missed the popup).
 8. When you finish, delete your codespace at <https://github.com/codespaces>.
+
+## Moving between checkpoints
+
+You start on `checkpoint-1`. After the personas prompt, go to `checkpoint-2`:
+
+```bash
+git add -A && git commit -m "docs: personas"
+git switch checkpoint-2
+```
+
+`checkpoint-2` already has its own approved personas. Yours stay on `checkpoint-1`. Drafting them was practice. You do not need to merge them.
+
+If you want to skip the personas step, run only `git switch checkpoint-2`. To go back: `git switch checkpoint-1`.
+
+Then run `npm install` once on `checkpoint-2`, and type `claude` again if you closed it.
 
 ## Troubleshooting
 
