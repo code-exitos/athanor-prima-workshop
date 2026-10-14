@@ -19,7 +19,7 @@ Short notes from three conversations. They are not a requirements list.
 
 - Has a phone with a small screen. It is an older Android phone he bought himself.
 - Does not like cameras. "Last time I scanned a code the screen was cracked and it took a minute. I would rather type a short code, six or eight characters, and see a green or red screen."
-- Works in a booth. "The signal comes and goes, mostly when it rains."
+- Works in a booth.
 - Wants the answer to be big and obvious. "I do not want to read small text at 3 am."
 
 ## Resident (Lucy, lives in section 7, has two children and visits from relatives)

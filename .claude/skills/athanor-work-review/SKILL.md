@@ -7,7 +7,7 @@ WORKSHOP EDITION: a condensed subset of a larger method. For workshop use only.
 
 # Work a feature, review it, open the PR
 
-Goal: all stories of one Feature built test-first on one branch, reviewed once or twice, then a PR. You merge it only if the user says yes. Review lenses: [review-checklist.md](review-checklist.md).
+Goal: all stories of one Feature built test-first on one branch, reviewed once or twice, then a PR. You merge it only if the user says yes. Review lenses: [review-checklist.md](review-checklist.md). Commit and PR format: [commit-pr-message-format.md](commit-pr-message-format.md), the same file the full Athanor method uses. In this edition the title length rule (72 characters) is checked by you; the title-check hook and workflow it mentions are not installed.
 
 Rules for this skill:
 - Pin the target: `REPO=<owner>/<name>` from `git remote get-url origin`; `--repo "$REPO"` on every `gh` command; explicit `--base` and `--head` on the PR. Owner must equal `gh api user -q .login` or an org the user belongs to; otherwise STOP and tell the user to create their own copy from the template.
@@ -24,7 +24,7 @@ Rules for this skill:
 - `npm ci` (fall back to `npm install`), then `npm run typecheck && npm test`. If the baseline is not green, stop and explain.
 
 ### 1. Locate and read
-"Feature 3" means F-03 in `docs/context/business/features.md`, not GitHub issue #3: find the Feature issue by its title or `F-03`. Use an issue number only when the user writes one with `#`. Find the parent by number or keywords (`gh issue view <n> --repo "$REPO"`, or `gh issue list --repo "$REPO" --search ...`). Fetch sub-issues: `gh api repos/$REPO/issues/<n>/sub_issues`; if that fails, parse the task list in the parent body. If there are none, stop and suggest the spec skill. Read the parent, every story, all `docs/context/` docs, `docs/adr/` and `CLAUDE.md`.
+"Feature 3" means F-03 in `.athanor/context/business/features.md`, not GitHub issue #3: find the Feature issue by its title or `F-03`. Use an issue number only when the user writes one with `#`. Find the parent by number or keywords (`gh issue view <n> --repo "$REPO"`, or `gh issue list --repo "$REPO" --search ...`). Fetch sub-issues: `gh api repos/$REPO/issues/<n>/sub_issues`; if that fails, parse the task list in the parent body. If there are none, stop and suggest the spec skill. Read the parent, every story, all `.athanor/context/` docs, `.athanor/docs/adr/` and `CLAUDE.md`.
 
 ### 2. Plan and approval
 Present: branch name `feature/<n>-<slug>`; story order (by dependency); per story the files to touch, tests to write, and risks. Say that all stories are worked before any PR, and that you will ask again before pushing. Ask for go-ahead to start building.
@@ -36,7 +36,7 @@ Present: branch name `feature/<n>-<slug>`; story order (by dependency); per stor
 1. Restate its acceptance criteria (AC-1, AC-2, ...).
 2. Write failing tests first, named or commented with their AC id. Run them and SHOW the red output. Confirm they fail for the right reason (missing behavior, not a typo).
 3. Implement the minimum. Run tests (green), `npm run typecheck`, then a small refactor.
-4. Commit: `feat(<scope>): <summary> (#<story>)`.
+4. Commit using the commit format: `<type>(<scope>): <summary>` (72 characters or fewer), a short body, and `Closes: #<story>`. Add `Assumptions:` only when one was logged.
 5. Comment on the story: `gh issue comment <story> --repo "$REPO" --body "<AC status> <commit sha>"`. Do NOT close it.
 6. Update the running progress table in chat (story, AC done/total, commit).
 
@@ -49,7 +49,7 @@ Apply `review-checklist.md` to `git diff origin/<base>...HEAD`. Report findings,
 ### 7. Open the PR
 1. Show the diff summary, review result, PR title, body preview, and target (`--repo`, `--base`, `--head`). Ask for an explicit yes before pushing.
 2. `git push -u origin <branch>`, then `gh pr create --repo "$REPO" --base <base> --head <branch> --title "<title>" --body-file <file>`.
-3. Body: Summary; `Closes #<parent>` and `Closes #<story>` per story; AC traceability table; test results; review summary and finding status; decisions and assumptions; how to demo (`npm run dev`, route, steps).
+3. Body: use the PR Description Template sections in order: Summary, Linked Issue(s) (`Closes #<parent>` and `Closes #<story>` per story), Changes, Test Plan (the AC-to-test table and test results), Review Notes (review summary, finding status, decisions and assumptions, how to demo with `npm run dev`).
 4. Say: GitHub auto-closes issues only when a PR merges into the DEFAULT branch. In workshop copies the default is `checkpoint-1` and this PR targets `checkpoint-2`, so offer to close the issues by hand after the user merges.
 5. Print the PR URL, then `gh pr checks <n> --repo "$REPO"`.
 6. Ask: "Merge this PR into `<base>`?" Merge only after an explicit yes in the user's next message, with `gh pr merge <n> --repo "$REPO" --merge`. Do not merge if checks fail or a Critical or High finding is open: say why and stop. If the user says no or does not answer, leave the PR open. After a merge, offer to close the issues by hand (item 4).

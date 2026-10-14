@@ -82,9 +82,12 @@ The skills are a workshop edition: a condensed subset of a larger method, for wo
 
 ## Layout
 
-- `docs/discovery/`: what the client told us.
-- `docs/context/`: approved business, design and engineering context.
-- `docs/adr/`: architecture decisions.
+All Athanor method files live in `.athanor/`:
+
+- `.athanor/context/`: approved business, design and engineering context.
+- `.athanor/docs/discovery/`: what the client told us.
+- `.athanor/docs/adr/`: architecture decisions (on `checkpoint-2`).
+- `.athanor/temp/`: scratch space for the agent. Keep it empty in commits.
 - `.claude/skills/`: `athanor-context-doc`, `athanor-spec-issue`, `athanor-work-review`.
 
 ## Facilitator note
