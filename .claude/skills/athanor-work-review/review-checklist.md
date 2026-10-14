@@ -13,7 +13,7 @@ Review the whole diff against the base branch. Report each finding as: severity,
    - Signature is checked before the payload is trusted.
    - All user-provided text reaches the DOM through `textContent`. No `innerHTML` with input.
    - Blocklist matching is normalized (case, whitespace).
-   - No secrets or personal data in logs, URLs, or the repo. Aliases only.
+   - No secrets or personal data in logs, URLs, or the repo. Fake names only.
    - Errors do not leak internals.
 3. **Tests**
    - Boundary, negative and error cases exist.
