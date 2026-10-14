@@ -22,7 +22,7 @@ export function renderLogView(root: HTMLElement): void {
 
   const body =
     entries.length === 0
-      ? el('p', {}, 'No entries yet')
+      ? el('p', { class: 'empty' }, 'No entries yet')
       : el(
           'table',
           {},
@@ -35,7 +35,7 @@ export function renderLogView(root: HTMLElement): void {
                 'tr',
                 {},
                 el('td', {}, entry.at),
-                el('td', {}, entry.result),
+                el('td', { class: entry.result === 'granted' ? 'granted' : 'denied' }, entry.result),
                 el('td', {}, entry.reason),
                 el('td', {}, entry.unit ?? ''),
                 el('td', {}, entry.visitorAlias ?? ''),
@@ -44,5 +44,5 @@ export function renderLogView(root: HTMLElement): void {
           ),
         );
 
-  root.replaceChildren(el('h1', {}, 'Entry log'), exportButton, body);
+  root.replaceChildren(el('h1', {}, 'Entry log'), el('div', { class: 'toolbar' }, exportButton), el('div', { class: 'card table-wrap' }, body));
 }

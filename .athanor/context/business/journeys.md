@@ -14,7 +14,7 @@ Status: Approved
 1. Lucy opens the app at `#/` (PG-1).
 2. She picks her unit, types an alias for the visitor, chooses the pass type and dates.
 3. She presses **Create pass**. The app creates and signs the pass.
-4. The app shows a QR code, the verify link, and a **Copy verify link** button.
+4. The app shows a QR code and a **Copy verify link** button.
 5. She copies the link and sends it by text message.
 
 ### Alternate Paths

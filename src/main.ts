@@ -1,4 +1,4 @@
-// App entry: renders the screen for the current hash route.
+// App entry: renders the screen for the current route (hash route, or the ?p= verify link).
 
 import './ui/styles.css';
 import { el } from './ui/dom';
@@ -14,13 +14,14 @@ if (!app) {
 const root = app;
 
 function render(): void {
-  const route = parseRoute(window.location.hash);
+  const route = parseRoute(window.location.hash, window.location.search);
   const content = el('main', { id: 'main' });
   const nav = el(
     'nav',
     { 'aria-label': 'Main' },
-    el('a', { href: '#/' }, 'New pass'),
-    el('a', { href: '#/log' }, 'Entry log'),
+    el('span', { class: 'brand' }, 'Neighborhood Access'),
+    el('a', route.name === 'resident' ? { href: '#/', 'aria-current': 'page' } : { href: '#/' }, 'New pass'),
+    el('a', route.name === 'log' ? { href: '#/log', 'aria-current': 'page' } : { href: '#/log' }, 'Entry log'),
   );
   switch (route.name) {
     case 'resident':

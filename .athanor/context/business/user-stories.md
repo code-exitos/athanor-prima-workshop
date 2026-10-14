@@ -200,7 +200,7 @@ Create a pass, press **Copy verify link**, and check the clipboard and the confi
 
 #### Technical Context
 
-The verify URL is built from `window.location.origin`, never a fixed host (R-3). Format: `<origin><path>#/verify?p=<token>`.
+The verify URL is built from `window.location.origin`, never a fixed host (R-3). Format: `<origin><path>?p=<token>`. The token is in the query string because sign-in redirects (for example Codespaces port forwarding) drop the `#fragment` but keep the query.
 
 #### Acceptance Criteria
 

@@ -53,7 +53,7 @@ The token crossing from the resident phone to the guard phone is the one trust b
 #### C-2: Browser app
 
 - **Role:** Runs all logic: pass creation, signing, QR, log view, and (F-3) verification.
-- **Technology/service:** Single-page app in plain TypeScript, hash routes `#/`, `#/log`, `#/verify` (PG-1 to PG-3).
+- **Technology/service:** Single-page app in plain TypeScript, hash routes `#/` and `#/log`, and the verify link `?p=<token>` (PG-1 to PG-3).
 - **Key responsibilities:** Domain rules (`src/domain`, pure, time as a parameter, ADR 0002), services, UI. It owns no server-side state.
 - **Notes:** Verification is not built yet. The verify route shows a placeholder.
 
@@ -112,7 +112,7 @@ sequenceDiagram
     participant G as Guard (C-2, F-3 not built)
     participant S as C-4 localStorage
     R->>R: createPass(input, now), signPass (C-3)
-    R->>R: Show QR code and verify link (C-5)
+    R->>R: Show QR code and copy button (C-5)
     R-->>G: Token by text message
     G->>G: Signature valid?
     G->>G: Blocklist check, overrides everything after it

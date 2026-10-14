@@ -15,7 +15,7 @@ Status: Approved
 
 ### F-2: QR code and shareable link
 
-- **Description:** The signed token is shown as a QR code and as a verify URL built from the current origin. A **Copy verify link** button copies the URL. Built.
+- **Description:** The signed token is shown as a QR code. A **Copy verify link** button copies the verify URL, which is built from the current origin. The URL text is not shown. Built.
 - **Rationale:** The visitor needs something to show or receive; the resident wants a link to send by text message (R-3; `.athanor/docs/discovery/stakeholder-notes.md`).
 - **Serves:** G-1
 - **Est. story count:** 2 (US-3, US-4)

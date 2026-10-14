@@ -61,9 +61,9 @@ Design constraints:
 - Accessibility: WCAG AA contrast.
 
 Generate these screens, each with its full set of interaction states:
-1. PG-1 New pass (#/): a short form with a unit select, a visitor alias text field, a pass type choice (one-time or date-range), start and end date-time fields and a large "Create pass" button. After submit, show a QR code, the link as text, and a "Copy verify link" button.
+1. PG-1 New pass (#/): a short form with a unit select, a visitor alias text field, a pass type choice (one-time or date-range), start and end date-time fields and a large "Create pass" button. After submit, show the QR code and a "Copy verify link" button. Do not show the link as text.
 2. PG-2 Entry log (#/log): a simple table (time, result, reason, unit, alias) and an "Export CSV" button. Show "No entries yet" when empty.
-3. PG-3 Verification result (#/verify): a full-screen panel. Green with a check icon and the text ACCESS GRANTED, or red with a cross icon and the text ACCESS DENIED, plus one line with the reason. Granted also shows the unit and the visitor alias, and for a one-time pass the line "One-time pass. It cannot be used again." Denied shows the reason only. The reason texts are fixed (`.athanor/context/engineering/prd.md`, R-6).
+3. PG-3 Verification result (?p=<token>): a full-screen panel. Green with a check icon and the text ACCESS GRANTED, or red with a cross icon and the text ACCESS DENIED, plus one line with the reason. Granted also shows the unit and the visitor alias, and for a one-time pass the line "One-time pass. It cannot be used again." Denied shows the reason only. The reason texts are fixed (`.athanor/context/engineering/prd.md`, R-6).
 
 For each screen, specify:
 - Component breakdown and layout

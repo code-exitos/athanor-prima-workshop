@@ -1,11 +1,17 @@
+/* Neighborhood Access styles. Colour tokens and rules: .athanor/context/design/brand-guidelines.md (WCAG AA). */
 :root {
   --text: #1a1a1a;
   --muted: #595959;
   --primary: #0b4f9c;
+  --primary-tint: #e6eefa;
   --granted: #0b6b2e;
   --denied: #b3261e;
   --surface: #ffffff;
+  --page: #eef2f7;
   --border: #767676;
+  --line: #d6dde8;
+  --radius: 16px;
+  --shadow: 0 1px 2px rgba(16, 32, 56, 0.06), 0 8px 24px rgba(16, 32, 56, 0.08);
 }
 
 * { box-sizing: border-box; }
@@ -16,43 +22,130 @@ body {
   font-size: 1rem;
   line-height: 1.5;
   color: var(--text);
-  background: var(--surface);
+  background: var(--page);
+  -webkit-text-size-adjust: 100%;
 }
 
-nav { display: flex; gap: 1rem; padding: 0.5rem 1rem; border-bottom: 1px solid var(--border); }
-nav a { color: var(--primary); padding: 0.75rem 0; min-height: 44px; }
-main { max-width: 36rem; margin: 0 auto; padding: 1rem; }
+h1 { font-size: 1.75rem; line-height: 1.2; margin: 1.5rem 0 1.25rem; letter-spacing: -0.01em; }
+h2 { font-size: 1.25rem; margin: 0 0 1rem; }
 
-.field { margin-bottom: 1rem; }
-label { display: block; font-weight: 600; margin-bottom: 0.25rem; }
+/* Top bar */
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 1px 0 rgba(16, 32, 56, 0.04);
+}
+nav .brand { font-weight: 700; color: var(--primary); margin-right: auto; padding: 0.5rem 0; font-size: 1.05rem; }
+nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 1rem;
+  border-radius: 999px;
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+nav a:hover { background: var(--primary-tint); }
+nav a[aria-current='page'] { background: var(--primary); color: #fff; }
+
+main { max-width: 34rem; margin: 0 auto; padding: 0 1rem 3rem; }
+
+/* Cards */
+.card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+/* Form */
+.field { margin-bottom: 1.1rem; }
+label { display: block; font-weight: 600; margin-bottom: 0.35rem; }
 input, select {
   width: 100%;
-  min-height: 44px;
-  padding: 0.5rem;
+  min-height: 48px;
+  padding: 0.5rem 0.75rem;
   font: inherit;
+  color: var(--text);
+  background: var(--surface);
   border: 2px solid var(--border);
-  border-radius: 6px;
+  border-radius: 10px;
 }
-.field-error { color: var(--denied); margin: 0.25rem 0 0; min-height: 1.5rem; }
+input:focus, select:focus { border-color: var(--primary); outline: 3px solid var(--primary-tint); }
+.field-error { color: var(--denied); font-weight: 600; margin: 0.25rem 0 0; min-height: 1.5rem; }
 
 button {
-  min-height: 44px;
-  padding: 0.5rem 1.25rem;
+  min-height: 48px;
+  padding: 0.5rem 1.5rem;
   font: inherit;
-  font-weight: 600;
+  font-weight: 700;
   color: #fff;
   background: var(--primary);
-  border: 0;
-  border-radius: 6px;
+  border: 2px solid var(--primary);
+  border-radius: 10px;
   cursor: pointer;
+  transition: background 0.15s, transform 0.05s;
 }
-button:disabled { background: var(--muted); cursor: not-allowed; }
+button:hover { background: #093f7d; border-color: #093f7d; }
+button:active { transform: translateY(1px); }
+button.wide { width: 100%; }
+button.secondary { background: var(--surface); color: var(--primary); }
+button.secondary:hover { background: var(--primary-tint); }
+button:disabled { background: #e3e6ea; border-color: #e3e6ea; color: var(--muted); cursor: not-allowed; }
 :focus-visible { outline: 3px solid var(--text); outline-offset: 2px; }
 
-.qr { display: block; margin: 1rem 0; max-width: 100%; }
-.link-text { overflow-wrap: anywhere; color: var(--muted); }
-.status { color: var(--granted); min-height: 1.5rem; }
+/* Pass result: only the QR code, plus a copy button */
+.pass-result:empty { display: none; }
+.pass-result {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  text-align: center;
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.pass-result h2 { color: var(--granted); }
+.qr { display: block; margin: 0 auto 1.25rem; width: 100%; max-width: 20rem; height: auto; border: 1px solid var(--line); border-radius: 12px; }
+.status { color: var(--granted); font-weight: 600; min-height: 1.5rem; margin: 0.75rem 0 0; }
 
-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
-th, td { text-align: left; padding: 0.5rem; border-bottom: 1px solid var(--border); }
-.panel { padding: 2rem 1rem; }
+/* Entry log */
+.toolbar { margin-bottom: 1rem; }
+.table-wrap { padding: 0.5rem; overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; padding: 0.75rem; border-bottom: 1px solid var(--line); }
+th { font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+tbody tr:nth-child(even) { background: #f7f9fc; }
+td.granted { color: var(--granted); font-weight: 700; }
+td.denied { color: var(--denied); font-weight: 700; }
+.empty { margin: 0; padding: 1rem; color: var(--muted); text-align: center; }
+
+/* Verify screen */
+.panel { margin-top: 2rem; padding: 2rem 1.5rem; text-align: center; }
+.panel h1 { font-size: 1.5rem; margin-top: 0; }
+.result {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem 1rem;
+  text-align: center;
+  color: #fff;
+}
+.result.granted { background: var(--granted); }
+.result.denied { background: var(--denied); }
+.result .icon { font-size: 6rem; line-height: 1; font-weight: 700; }
+.result .title { font-size: 2.5rem; line-height: 1.1; font-weight: 800; margin: 0; }
+.result .reason { font-size: 1.5rem; margin: 0; }
+
+@media (min-width: 40rem) {
+  main { padding-top: 0.5rem; }
+  button.wide { width: auto; min-width: 12rem; }
+}

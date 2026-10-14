@@ -13,7 +13,7 @@ The board wants passes, no server at launch, and a small budget. A guard's phone
 
 ## Decision
 
-A pass is a **signed token**: `base64url(JSON payload) + "." + base64url(signature)`. The signature is ECDSA P-256 with SHA-256, made with the Web Crypto API. The token goes into a verify URL, shown as a QR code and as a link. A verifier needs the pass and the public key only.
+A pass is a **signed token**: `base64url(JSON payload) + "." + base64url(signature)`. The signature is ECDSA P-256 with SHA-256, made with the Web Crypto API. The token goes into a verify URL (`?p=<token>`), shown as a QR code and copied as a link. A verifier needs the pass and the public key only.
 
 We use no backend and no crypto library.
 

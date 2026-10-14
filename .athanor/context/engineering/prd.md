@@ -69,7 +69,7 @@ A created pass is signed with ECDSA P-256 / SHA-256. The token format is in `dat
 
 ### R-3: The verify URL uses the current origin
 
-The verify URL is built from `window.location.origin`, never a fixed host.
+The verify URL is built from `window.location.origin`, never a fixed host. Its format is `<origin><path>?p=<token>`. The token is in the query string, not the `#fragment`, because sign-in redirects (for example Codespaces port forwarding) drop the fragment but keep the query.
 
 - **Serves:** G-5
 - **Verified by:** US-4

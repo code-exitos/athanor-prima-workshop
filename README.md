@@ -50,6 +50,7 @@ Then run `npm install` once on `checkpoint-2`, and type `claude` again if you cl
 | No `checkpoint-2` branch | You skipped "Include all branches". Run `bash scripts/workshop-check.sh`. It restores the branch. |
 | `gh` is not logged in | Run `gh auth login` and follow the prompts. |
 | "Blocked request. This host is not allowed" page | Open the app from the **Ports** tab (globe icon), not by typing the address. The dev server allows `*.app.github.dev` only. |
+| Phone cannot open the verify link | In the **Ports** tab, right-click port 5173 → **Port Visibility** → **Public**. Then scan the QR code again. |
 | No browser popup | Open the **Ports** tab, find port 5173, and click the globe icon. |
 | Codespace is blocked or out of free hours | Use a personal account, check <https://github.com/settings/billing>, or use **Running locally** below. |
 | Script says you opened the facilitator's repo | Create your own copy with **Use this template** (steps 1 to 3). |

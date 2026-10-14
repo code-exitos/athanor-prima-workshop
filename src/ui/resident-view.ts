@@ -1,4 +1,4 @@
-// Resident screen: create a pass, sign it, show the QR code and the verify link.
+// Resident screen: create a pass, sign it, show the QR code and a button that copies the verify link.
 
 import QRCode from 'qrcode';
 import { UNITS } from '../data/units';
@@ -26,19 +26,18 @@ async function renderResult(container: HTMLElement, token: string): Promise<void
   const url = buildVerifyUrl(window.location.origin, window.location.pathname, token);
   const qr = el('img', {
     class: 'qr',
-    alt: 'QR code with the verify link for this pass',
-    src: await QRCode.toDataURL(url, { margin: 2, width: 280 }),
+    alt: 'QR code for this pass. Scan it to open the verify page.',
+    src: await QRCode.toDataURL(url, { margin: 2, width: 320 }),
   });
   const status = el('p', { role: 'status', class: 'status' });
-  const copy = el('button', { type: 'button' }, 'Copy verify link');
+  const copy = el('button', { type: 'button', class: 'secondary' }, 'Copy verify link');
   copy.addEventListener('click', () => {
     navigator.clipboard.writeText(url).then(
       () => (status.textContent = 'Link copied.'),
-      () => (status.textContent = 'Could not copy. Select the link and copy it by hand.'),
+      () => (status.textContent = 'Could not copy the link. Scan the QR code instead.'),
     );
   });
-  const linkText = el('p', { class: 'link-text' }, url);
-  container.replaceChildren(el('h2', {}, 'Pass created'), qr, linkText, copy, status);
+  container.replaceChildren(el('h2', {}, 'Pass created'), qr, copy, status);
 }
 
 export function renderResidentView(root: HTMLElement): void {
@@ -54,18 +53,18 @@ export function renderResidentView(root: HTMLElement): void {
   const unit = unitSelect();
   const type = typeSelect();
   const formError = el('p', { class: 'field-error', role: 'alert' });
-  const result = el('section', { 'aria-live': 'polite' });
+  const result = el('section', { 'aria-live': 'polite', class: 'pass-result' });
 
   const form = el(
     'form',
-    { novalidate: '' },
+    { novalidate: '', class: 'card' },
     labeledField('unit', 'Unit', unit, 'unit-error'),
     labeledField('alias', 'Visitor alias (nickname or initials, no legal names)', alias, 'alias-error'),
     labeledField('type', 'Pass type', type, 'type-error'),
     labeledField('from', 'Valid from', validFrom, 'from-error'),
     labeledField('until', 'Valid until', validUntil, 'until-error'),
     formError,
-    el('button', { type: 'submit' }, 'Create pass'),
+    el('button', { type: 'submit', class: 'wide' }, 'Create pass'),
   );
 
   form.addEventListener('submit', (event) => {

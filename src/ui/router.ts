@@ -1,4 +1,5 @@
-// Hash routing: #/ (resident), #/log (entry log), #/verify?p=<token>.
+// Routing: #/ (resident), #/log (entry log). A verify link carries the token in the query
+// string (?p=<token>). The old #/verify?p=<token> form is still understood.
 
 export type Route =
   | { readonly name: 'resident' }
@@ -6,16 +7,17 @@ export type Route =
   | { readonly name: 'verify'; readonly token: string | null }
   | { readonly name: 'not-found' };
 
-export function parseRoute(hash: string): Route {
+export function parseRoute(hash: string, search = ''): Route {
+  const queryToken = new URLSearchParams(search).get('p');
   const [path = '', query = ''] = hash.replace(/^#/, '').split('?');
   switch (path) {
     case '':
     case '/':
-      return { name: 'resident' };
+      return queryToken === null ? { name: 'resident' } : { name: 'verify', token: queryToken };
     case '/log':
       return { name: 'log' };
     case '/verify':
-      return { name: 'verify', token: new URLSearchParams(query).get('p') };
+      return { name: 'verify', token: new URLSearchParams(query).get('p') ?? queryToken };
     default:
       return { name: 'not-found' };
   }
