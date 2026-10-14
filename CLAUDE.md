@@ -2,11 +2,12 @@
 
 WORKSHOP EDITION: a condensed subset of a larger method. For workshop use only.
 
+- A section marked "Not stated in discovery." is out of scope for this demo. Do not ask about it.
 - Never invent facts. If the sources do not say it, log it as a labeled assumption that takes the recommended option (who decided, when). Context docs and issues carry no open questions.
 - Context docs follow the Athanor templates and carry front matter `Status: Draft | Under Review | Approved`. Items use ID codes (G-#, P-#, J-#, F-#, US-#, AC-#, R-#, E-#). Only a human approves a doc. Issues and commit/PR messages use the template files in `.claude/skills/`.
 - Co-create: explain what you are about to make and why, ask at most 3 questions per turn (each with a recommended answer), propose, show, get approval. Never produce a finished artifact in one shot.
 - Never create issues, labels or milestones, push a branch, or open a PR without explicit approval.
-- Always target the user's own repo with `--repo "$REPO"` (from `origin`). Never write to the facilitator's template repo.
+- Always target the user's own repo with `--repo "$REPO"` (from `origin`). Never write to the workshop template repo.
 - Tests first. Never call work done with failing tests, typecheck or build.
 - Domain code is pure: time is always a parameter. Nothing in `src/domain` calls `Date.now()` or `new Date()` without an argument.
 - Escape or use `textContent` for every user-provided string. Fake data only. No secrets, no real names.

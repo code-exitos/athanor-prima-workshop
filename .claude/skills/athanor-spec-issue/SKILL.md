@@ -13,7 +13,7 @@ Rules for this skill:
 - Ask at most 3 questions at a time. Each has a reason and a recommended answer. Offer "accept all recommendations" once.
 - Cite source paths. Never invent facts; a gap is a labeled assumption that takes your recommendation (who decided, when). Issues have no open questions.
 - Pin the target: `REPO=<owner>/<name>` from `git remote get-url origin`. Pass `--repo "$REPO"` on every `gh` command.
-- Before any write: the owner must equal `gh api user -q .login` or an org the user belongs to (`gh api user/orgs -q '.[].login'`). If not, STOP. Say: the Codespace was probably opened on the facilitator's repo; create your own copy with "Use this template" (tick "Include all branches"). Do not write anything.
+- Before any write: the owner must equal `gh api user -q .login` or an org the user belongs to (`gh api user/orgs -q '.[].login'`). If not, STOP. Say: the Codespace was probably opened on the workshop template repo; create your own copy with "Use this template" (tick "Include all branches"). Do not write anything.
 - Nothing is created on GitHub until the user says an explicit yes in step 6.
 
 ## Steps
@@ -30,7 +30,7 @@ In a few lines: a Feature is the outcome; a User Story sub-issue is one slice a 
 Find it in `.athanor/context/business/features.md`. "Feature 3" means F-03 in that file, not GitHub issue #3. Read the PRD, personas, journeys, data model, architecture, brand guidelines and `.athanor/docs/adr/`. Check for duplicates: `gh issue list --repo "$REPO" --state all --search "<keywords>"`. If one exists, offer to refine it instead of creating a new one.
 
 ### 3. Confirm decisions
-Read the PRD "Decisions" and "Assumptions" sections and the other context docs. List every decision and assumption that affects this feature, one line each, and ask the user to confirm or change them (batches of at most 3). Context docs have no open questions, so do not reopen a settled decision. If this feature needs something the docs do not decide, propose the recommended option (the easy or logical one) with its consequence, and record it as a labeled assumption (who decided, when) in the Feature issue.
+Read the PRD "Decisions" and "Assumptions" sections and the other context docs. List every decision and assumption that affects this feature, one line each, and ask the user to confirm or change them (batches of at most 3). Context docs have no open questions, so do not reopen a settled decision. A section marked "Not stated in discovery." is out of scope for this demo: do not ask about it. If this feature needs something the docs do not decide, propose the recommended option (the easy or logical one) with its consequence, and record it as a labeled assumption (who decided, when) in the Feature issue.
 
 ### 4. Metadata round
 Ask for: start date and target date (defaults: today and today + 7 days), priority (high, medium, low), size (S, M, L), assignee (default `@me`). Explain labels and the milestone in one line each.
