@@ -1,7 +1,7 @@
 ---
 title: Product requirements document (increment 1)
 status: Approved
-owner: Product owner (Residencial Los Pinos board liaison)
+owner: Product owner (Tartan Fields board liaison)
 last_updated: 2026-10-14
 ---
 
@@ -58,7 +58,7 @@ Applied in this order:
 
 These come from the discovery packet. They are **not resolved**. Resolve them when specifying F-03.
 
-1. **End date.** The Reglamento says a pass is valid "until" the end date. Is that instant included or not?
+1. **End date.** The bylaws say a pass is valid "until" the end date. Is that instant included or not?
 2. **Revocation.** Who may revoke a pass: the resident, the administrator, the guard? How does a revocation reach a device with no server?
 3. **No signal.** What should happen when the guard's phone has no signal? Can the page open at all?
 4. **Domestic staff.** Mentioned once, with no rules. Out of scope until the board gives rules (F-06).

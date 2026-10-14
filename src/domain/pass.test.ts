@@ -4,11 +4,11 @@ import { createPass, type PassInput } from './pass';
 const NOW = new Date('2026-06-01T12:00:00.000Z');
 
 const validInput: PassInput = {
-  unit: 'Casa 01',
+  unit: 'Unit 01',
   type: 'date-range',
   validFrom: '2026-06-02T10:00:00.000Z',
   validUntil: '2026-06-03T10:00:00.000Z',
-  visitorAlias: '  Tío Beto ',
+  visitorAlias: '  Uncle Bob ',
 };
 
 describe('createPass', () => {
@@ -18,11 +18,11 @@ describe('createPass', () => {
     if (result.ok) {
       expect(result.pass).toMatchObject({
         v: 1,
-        unit: 'Casa 01',
+        unit: 'Unit 01',
         type: 'date-range',
         validFrom: '2026-06-02T10:00:00.000Z',
         validUntil: '2026-06-03T10:00:00.000Z',
-        visitorAlias: 'Tío Beto',
+        visitorAlias: 'Uncle Bob',
       });
       expect(result.pass.id).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/);
     }

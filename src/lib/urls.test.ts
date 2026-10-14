@@ -7,6 +7,6 @@ describe('buildVerifyUrl', () => {
   });
 
   it('keeps a sub-path', () => {
-    expect(buildVerifyUrl('https://example.test', '/pinos/', 't')).toBe('https://example.test/pinos/#/verify?p=t');
+    expect(buildVerifyUrl('https://example.test', '/tartan/', 't')).toBe('https://example.test/tartan/#/verify?p=t');
   });
 });

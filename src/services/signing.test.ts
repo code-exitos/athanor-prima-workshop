@@ -7,7 +7,7 @@ import { importPrivateKey, importPublicKey, signPass } from './signing';
 const pass: Pass = {
   v: 1,
   id: '3f0c1d52-7a39-4a55-9d0b-0a1b2c3d4e5f',
-  unit: 'Casa 03',
+  unit: 'Unit 03',
   type: 'one-time',
   validFrom: '2026-06-02T10:00:00.000Z',
   validUntil: '2026-06-02T22:00:00.000Z',

@@ -13,7 +13,7 @@ describe('base64url', () => {
   });
 
   it('round-trips unicode text', () => {
-    expect(base64urlToText(textToBase64url('Tío Beto ✓'))).toBe('Tío Beto ✓');
+    expect(base64urlToText(textToBase64url('Zoë ✓'))).toBe('Zoë ✓');
   });
 
   it('handles empty input', () => {

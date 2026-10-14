@@ -1,7 +1,7 @@
 ---
 title: User journeys
 status: Approved
-owner: Product owner (Residencial Los Pinos board liaison)
+owner: Product owner (Tartan Fields board liaison)
 last_updated: 2026-10-14
 ---
 
@@ -9,11 +9,11 @@ last_updated: 2026-10-14
 
 ## J-1: Resident creates and shares a pass (F-01, F-02)
 
-1. Lucía opens the app at `#/`.
+1. Lucy opens the app at `#/`.
 2. She picks her unit, types an alias for the visitor, chooses the pass type and dates.
 3. She presses **Create pass**. If the input is wrong, the form shows what to fix.
 4. The app shows a QR code, the verify link, and a **Copy verify link** button.
-5. She copies the link and sends it by WhatsApp.
+5. She copies the link and sends it by text message.
 
 **Done when:** the visitor has a link that opens the verify page.
 
@@ -33,7 +33,7 @@ last_updated: 2026-10-14
 
 ## J-3: Administrator reviews the log (F-04)
 
-1. Marisol opens `#/log`.
+1. Marissa opens `#/log`.
 2. She sees entries, or "No entries yet" when there are none.
 3. She presses **Export CSV** and opens the file in a spreadsheet. The button is disabled when there are no entries.
 

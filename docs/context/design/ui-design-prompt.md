@@ -1,7 +1,7 @@
 ---
 title: UI design prompt
 status: Approved
-owner: Product owner (Residencial Los Pinos board liaison)
+owner: Product owner (Tartan Fields board liaison)
 last_updated: 2026-10-14
 ---
 
@@ -15,4 +15,4 @@ Use this prompt with a design tool to explore screens. Follow `brand-guidelines.
 > 2. **Entry log** (`#/log`): a simple table (time, result, reason, unit, alias) and an **Export CSV** button. Show "No entries yet" when empty.
 > 3. **Verification result** (`#/verify`): a full-screen panel. Green with a check icon and the text ACCESS GRANTED, or red with a cross icon and the text ACCESS DENIED, plus one line with the reason. Text is very large and readable on a cracked phone screen at night.
 >
-> Rules: a calm, plain look. Colours `#0B4F9C` primary, `#0B6B2E` granted, `#B3261E` denied, white surface, `#1A1A1A` text. WCAG AA contrast. Results never rely on colour alone. Tap targets at least 44px. No real names; show only aliases like "Tío Beto" or "JR".
+> Rules: a calm, plain look. Colours `#0B4F9C` primary, `#0B6B2E` granted, `#B3261E` denied, white surface, `#1A1A1A` text. WCAG AA contrast. Results never rely on colour alone. Tap targets at least 44px. No real names; show only aliases like "Uncle Bob" or "JR".

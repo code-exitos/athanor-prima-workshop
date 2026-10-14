@@ -15,7 +15,7 @@ A static single-page app. No backend, no database, no accounts. Everything runs 
 Resident phone                          Guard phone
   form -> createPass -> signPass          open link -> verify page
   token = payload.signature               (F-03) verifyPass(token, now, ledger,
-  QR + link  ------------ text/WhatsApp ------> blocklist, publicKey)
+  QR + link  ------------ text message ------> blocklist, publicKey)
                                           ledger + log in localStorage
 ```
 

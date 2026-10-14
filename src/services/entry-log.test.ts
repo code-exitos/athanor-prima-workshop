@@ -7,7 +7,7 @@ const granted: EntryRecord = {
   result: 'granted',
   reason: 'Valid pass',
   passId: 'p1',
-  unit: 'Casa 01',
+  unit: 'Unit 01',
   visitorAlias: 'JR',
 };
 const denied: EntryRecord = { at: '2026-06-02T11:00:00.000Z', result: 'denied', reason: 'Invalid signature' };
@@ -34,7 +34,7 @@ describe('toCsv', () => {
     expect(toCsv([granted, denied])).toBe(
       [
         'at,result,reason,passId,unit,visitorAlias',
-        '2026-06-02T10:00:00.000Z,granted,Valid pass,p1,Casa 01,JR',
+        '2026-06-02T10:00:00.000Z,granted,Valid pass,p1,Unit 01,JR',
         '2026-06-02T11:00:00.000Z,denied,Invalid signature,,,',
         '',
       ].join('\n'),

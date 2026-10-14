@@ -6,7 +6,7 @@ date: 2026-09-02
 
 # Community Bylaws, Chapter 4: Visitors (excerpt)
 
-*This is a fictional excerpt written for the workshop. It is not a real legal document.*
+*This is a fictional excerpt written for the workshop. It is not a real legal document. The community name is used for illustration only; the board, people and rules are invented.*
 
 **Art. 18. Visitor pass.** A resident may authorize a visitor to enter the community by issuing a visitor pass for one housing unit. A visitor pass is valid from the start date until the end date that the resident chooses.
 

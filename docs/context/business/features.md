@@ -1,7 +1,7 @@
 ---
 title: Features
 status: Approved
-owner: Product owner (Residencial Los Pinos board liaison)
+owner: Product owner (Tartan Fields board liaison)
 last_updated: 2026-10-14
 ---
 
@@ -38,4 +38,4 @@ A fake blocklist in `src/data/blocklist.ts` and the `isBlocked` function. The bl
 
 ## F-06 Recurring passes for domestic staff (future, out of scope)
 
-Domestic staff come every week. The Reglamento Interno says only that they follow rules approved by the board, and no rules have been given. This feature is not planned. It needs rules from the board first.
+Domestic staff come every week. The community bylaws say only that they follow rules approved by the board, and no rules have been given. This feature is not planned. It needs rules from the board first.

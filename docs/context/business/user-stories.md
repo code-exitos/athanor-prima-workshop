@@ -1,7 +1,7 @@
 ---
 title: User stories
 status: Approved
-owner: Product owner (Residencial Los Pinos board liaison)
+owner: Product owner (Tartan Fields board liaison)
 last_updated: 2026-10-14
 ---
 
@@ -31,7 +31,7 @@ As a resident, I want to see a QR code for my pass, so that my visitor can show 
 - **Given** a pass was created, **when** the result appears, **then** I see a QR code with a text alternative.
 
 ### US-02.2 Copy a link
-As a resident, I want to copy a verify link, so that I can send it by WhatsApp.
+As a resident, I want to copy a verify link, so that I can send it by text message.
 
 - **Given** a pass was created, **when** I press **Copy verify link**, **then** the link is on my clipboard and I see a confirmation.
 - **Given** the app is served from any origin, **when** the link is built, **then** it starts with the current origin, not a fixed host.
