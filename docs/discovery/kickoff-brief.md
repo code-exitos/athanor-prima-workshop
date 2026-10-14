@@ -1,14 +1,14 @@
 ---
 title: Kickoff brief
-source: Residencial Los Pinos HOA board
+source: Tartan Fields HOA board
 date: 2026-09-02
 ---
 
-# Kickoff brief: visitor access at Residencial Los Pinos
+# Kickoff brief: visitor access at Tartan Fields
 
 ## Who we are talking to
 
-The board (*junta directiva*) of Residencial Los Pinos, a gated community of 120 homes in 12 blocks. The board has three members. The administrator handles day-to-day work.
+The board of Tartan Fields, a gated community near Columbus, Ohio, with 120 homes in 12 sections. The board has three members. The administrator handles day-to-day work.
 
 ## What happens today
 
