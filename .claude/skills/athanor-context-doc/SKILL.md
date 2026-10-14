@@ -1,0 +1,52 @@
+---
+name: athanor-context-doc
+description: Co-create a context document with the user. Use when the user says "draft the personas document", "create a context document", or "use the Athanor workshop skill to draft personas". Workshop edition supports personas only. Do NOT use to write issues, code, or any other document type.
+---
+
+WORKSHOP EDITION: a condensed subset of a larger method. For workshop use only.
+
+# Co-create the personas document
+
+Goal: a Draft `docs/context/business/personas.md`, built together with the user in about 10 minutes. Never write the whole document in one shot. Template: [personas-template.md](personas-template.md).
+
+Rules for this skill:
+- Ask at most 3 questions per round and at most 3 rounds. For each question, say why you ask and give a recommended answer from the sources, so the user can reply "yes".
+- Offer once, at the start of the question rounds: "Say **accept all** and I will take every recommendation as a labeled assumption."
+- Cite a source file for every claim: `(source: <path>)` or `(assumption)`.
+- A skipped question becomes an open question or an assumption (who decided, when).
+
+## Steps
+
+### 0. Preflight
+Read every file in `docs/discovery/` and every doc under `docs/context/`. List each doc with its `status`. If `docs/context/business/personas.md` exists and is Approved, say so and offer to review or refine it. Never overwrite without consent. If the user asks for another document type, say it is outside the workshop edition.
+
+### 1. Orient (teach)
+Say what you are about to make, why, and how it feeds the next step. Show this sequence:
+
+problem statement ✔ → vision ✔ → **personas** → journeys → features → user stories
+
+Explain in 3 sentences: personas are the people we build for; they come before journeys and stories so that every story names a real user; later documents refer to them by name. Then show the template sections in a table, one line of purpose each (read them from the template).
+
+### 2. Evidence pass
+Summarize what `docs/discovery/*` already says about the people involved, with file references. Propose 2 to 3 candidate personas. **Question round 1:** confirm or adjust the list. Remind the user they can say "accept all".
+
+### 3. Question rounds
+At most 3 rounds of at most 3 questions. Cover: goals and frustrations per persona; context of use (device, connectivity, environment); where personas conflict; who is out of scope.
+
+### 4. Proactive suggestions
+Flag conflicts and gaps in the sources and propose how to handle each:
+- typed code versus QR code (who wants what);
+- "valid until" with no statement about the end date;
+- the single mention of domestic staff;
+- "simple" versus "the blocklist overrides everything";
+- who may revoke a pass; what happens with no signal.
+Suggest at least one anti-persona. Do not resolve product decisions here: record them as open questions for the spec step.
+
+### 5. Draft
+Fill the template. Show the full document in chat and ask what to change or whether to approve. Default: at most 2 revision rounds, more if the user wants.
+
+### 6. Save
+After the user agrees, write `docs/context/business/personas.md` with `status: Draft`, `owner` from `git config user.name`, and `last_updated` set to today. Set `status: Approved` only after the user says explicitly that they approve. Offer to run `git add` and `git commit` (message: `docs: add personas`). Never push.
+
+### 7. Wrap up
+Summarize decisions, open questions and assumptions, and what this unlocks next: `git switch checkpoint-2`, then "spec the feature".
