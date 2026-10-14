@@ -1,4 +1,4 @@
-// Verify screen. Verification (F-03) is not built yet, so this shows a placeholder panel.
+// Verify screen. Verification (F-3) is not built yet, so this shows a placeholder panel.
 
 import { el } from './dom';
 

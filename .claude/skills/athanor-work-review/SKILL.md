@@ -24,7 +24,7 @@ Rules for this skill:
 - `npm ci` (fall back to `npm install`), then `npm run typecheck && npm test`. If the baseline is not green, stop and explain.
 
 ### 1. Locate and read
-"Feature 3" means F-03 in `.athanor/context/business/features.md`, not GitHub issue #3: find the Feature issue by its title or `F-03`. Use an issue number only when the user writes one with `#`. Find the parent by number or keywords (`gh issue view <n> --repo "$REPO"`, or `gh issue list --repo "$REPO" --search ...`). Fetch sub-issues: `gh api repos/$REPO/issues/<n>/sub_issues`; if that fails, parse the task list in the parent body. If there are none, stop and suggest the spec skill. Read the parent, every story, all `.athanor/context/` docs, `.athanor/docs/adr/` and `CLAUDE.md`.
+"Feature 3" means F-3 in `.athanor/context/business/features.md`, not GitHub issue #3: find the Feature issue by its title or `F-3`. Use an issue number only when the user writes one with `#`. Find the parent by number or keywords (`gh issue view <n> --repo "$REPO"`, or `gh issue list --repo "$REPO" --search ...`). Fetch sub-issues: `gh api repos/$REPO/issues/<n>/sub_issues`; if that fails, parse the task list in the parent body. If there are none, stop and suggest the spec skill. Read the parent, every story, all `.athanor/context/` docs, `.athanor/docs/adr/` and `CLAUDE.md`.
 
 ### 2. Plan and approval
 Present: branch name `feature/<n>-<slug>`; story order (by dependency); per story the files to touch, tests to write, and risks. Say that all stories are worked before any PR, and that you will ask again before pushing. Ask for go-ahead to start building.

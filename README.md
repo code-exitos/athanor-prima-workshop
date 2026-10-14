@@ -72,7 +72,7 @@ On Windows you can also use PowerShell with the same commands. Install Git, Node
 ## Branches
 
 - `checkpoint-1` (default): discovery packet and two approved docs. No app code. You write the personas here.
-- `checkpoint-2`: all context docs approved and the app built, except guard verification (feature F-03). You spec and build it here.
+- `checkpoint-2`: all context docs approved and the app built, except guard verification (feature F-3). You spec and build it here.
 
 ## Workshop infrastructure
 
