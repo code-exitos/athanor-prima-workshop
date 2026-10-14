@@ -1,0 +1,10 @@
+{
+  "name": "Athanor Prima Workshop",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:20",
+  "hostRequirements": { "cpus": 2 },
+  "postCreateCommand": "npm install -g @anthropic-ai/claude-code && ([ -f package.json ] && npm install || true)",
+  "forwardPorts": [5173],
+  "portsAttributes": {
+    "5173": { "label": "App", "onAutoForward": "openBrowser" }
+  }
+}
