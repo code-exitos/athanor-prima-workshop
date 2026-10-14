@@ -100,6 +100,7 @@ The policy is applied in this order. It stops at the first failure. Each failure
 | 3a | `now` is not before `validFrom` | Pass is not valid yet |
 | 3b | `now` is not after `validUntil` (the end is included, D-1) | Pass has expired |
 | 4 | One-time passes only: the pass id is not in the ledger | Pass already used |
+| 4b | One-time passes only: the verify page records the use in the ledger, and the write works (D-12) | Could not record pass use |
 | 5 | All checks passed | Pass is valid (granted) |
 
 `verifyPass(token, now, ledger, blocklist, publicKey)` is a pure function. Time is a parameter (ADR 0002). The verify page reads the clock once when it loads and passes it in. Side effects (ledger write, log entry, screen) happen outside `verifyPass`, in D-7 and D-9.
@@ -186,11 +187,13 @@ These settle the points the discovery packet left unclear. Decided by the worksh
 - **D-3 Domestic staff are out of scope (F-6).** No special handling in this version. Reason: the bylaws give no rules (Art. 23).
 - **D-4 QR code and link only, no typed code.** The QR code and the link carry the same signed token. Reason: the token is self-contained and signed (ADR 0001). A short typed code would need a server to look it up.
 - **D-5 Unused passes are not visible.** The entry log shows verification attempts only. Reason: the app does not store passes (E-1).
-- **D-6 Deny reasons are fixed texts.** They are the seven texts in the R-6 table. The log `reason` column uses the same text. Reason: the guard needs a short plain sentence, and the log should match the screen.
+- **D-6 Deny reasons are fixed texts.** They are the eight texts in the R-6 table. The log `reason` column uses the same text. Reason: the guard needs a short plain sentence, and the log should match the screen.
 - **D-7 One-time passes are marked used only on a grant.** The first grant writes the pass id to the ledger (E-4). A denied attempt never uses up a pass. Opening the same link again, or reloading, runs the whole check again: a one-time pass that was granted is then denied with "Pass already used". Date-range passes never write the ledger. The granted screen for a one-time pass adds the line "One-time pass. It cannot be used again."
 - **D-8 The blocklist matches the alias exactly, as built.** `isBlocked` is an exact, case-sensitive match. It is not changed. A different spelling or case of a blocked alias is not blocked. This is a known limitation of the demo (see Risks).
 - **D-9 One log entry per attempt, and what the screens show.** Every page load of the verify route appends one entry (`at` is the time the page read the clock when it loaded, see R-6; then `result` and `reason`). The entry also carries `passId`, `unit` and `visitorAlias` whenever the signature was valid, including blocked, not valid yet, expired and already used. It omits them when the token is missing, unreadable or has a bad signature, because those fields are not trusted. The granted screen shows ACCESS GRANTED, the reason, and the unit and alias. A denied screen shows ACCESS DENIED and the reason only. All text is set with `textContent`.
 - **D-10 A pass with `validUntil` equal to `validFrom` is allowed.** With D-1 it is valid at exactly that instant. F-1 is not changed.
+- **D-11 Screens are tested with `jsdom`.** The verify screen test runs in the `jsdom` environment, set on that test file only (`.athanor/context/engineering/tech-stack-and-repo-strategy.md`, Testing). `jsdom` is already installed as a `devDependency`. Do not add any other dependency for F-3.
+- **D-12 If storage fails, a one-time pass is denied.** If writing the ledger throws (for example `localStorage` is full or blocked), the verify page shows ACCESS DENIED with the reason "Could not record pass use". Reason: a pass that cannot be marked used could be reused. A date-range pass never writes the ledger, so it is not affected. If writing the log entry throws, the result on screen does not change. Nothing else in the app catches storage errors.
 
 ## Risks
 

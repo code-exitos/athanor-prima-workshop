@@ -22,7 +22,7 @@ Status: Approved
 
 ### F-3: Guard verifies a pass from the QR link
 
-- **Description:** The verify route opens from the QR link and applies the verification policy: signature, blocklist, validity window, one-time ledger, then grant or deny with a reason, and a log entry for every attempt. The exact check order, the fixed reason texts, one-time pass handling and the screens are settled in `.athanor/context/engineering/prd.md` (R-6, D-1 to D-10). Not built. The verify route today only shows "Verification is not implemented yet" (R-5).
+- **Description:** The verify route opens from the QR link and applies the verification policy: signature, blocklist, validity window, one-time ledger, then grant or deny with a reason, and a log entry for every attempt. The exact check order, the fixed reason texts, one-time pass handling and the screens are settled in `.athanor/context/engineering/prd.md` (R-6, D-1 to D-12). Not built. The verify route today only shows "Verification is not implemented yet" (R-5).
 - **Rationale:** It is the next feature in the PRD ("Next. To be specced.") and the one that delivers the guard's decision and the blocklist rule.
 - **Serves:** G-2, G-3, G-4
 - **Est. story count:** 3, to be specced as GitHub issues. Planned split: (1) `verifyPass`, the pure policy with the fixed reason texts (`prd.md` R-6); (2) the verify screen, which reads the clock once, writes the ledger on a grant of a one-time pass, and shows the result (D-7, D-9); (3) the log entry for every attempt, with the fields in D-9.

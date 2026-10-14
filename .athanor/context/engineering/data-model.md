@@ -69,7 +69,7 @@ The token is `base64url(JSON payload) + "." + base64url(signature)`. A verifier 
 A map from pass `id` to the time the pass was used. Storage key: `na.ledger.v1`. Single device only.
 
 - **Ownership / source of truth:** The browser's `localStorage` on the device that verifies (`src/services/ledger.ts`).
-- **Lifecycle:** Written by `markPassUsed` when a one-time pass is granted, and only then (`prd.md`, D-7). Date-range passes never write it. Nothing writes it yet because F-3 is not built. Read by the one-time check.
+- **Lifecycle:** Written by `markPassUsed` when a one-time pass is granted, and only then (`prd.md`, D-7). Date-range passes never write it. If the write fails, the pass is denied (`prd.md`, D-12). Nothing writes it yet because F-3 is not built. Read by the one-time check.
 - **Deletion model:** Retained until the user clears site data. The app has no delete function.
 
 ### E-5: Entry log
@@ -86,7 +86,7 @@ A map from pass `id` to the time the pass was used. Storage key: `na.ledger.v1`.
 A list of entries in storage key `na.entries.v1`, single device only. CSV columns: `at,result,reason,passId,unit,visitorAlias`.
 
 - **Ownership / source of truth:** The browser's `localStorage` on the device that verifies (`src/services/entry-log.ts`).
-- **Lifecycle:** Appended by `appendEntry`, one entry per verification attempt, including every reload of a verify link (`prd.md`, D-9). `reason` is one of the fixed texts in `prd.md` R-6. Nothing writes entries yet because F-3 is not built. Read and exported as CSV by F-4 (PG-2).
+- **Lifecycle:** Appended by `appendEntry`, one entry per verification attempt, including every reload of a verify link (`prd.md`, D-9). `reason` is one of the fixed texts in `prd.md` R-6. A failed log write never changes the screen (`prd.md`, D-12). Nothing writes entries yet because F-3 is not built. Read and exported as CSV by F-4 (PG-2).
 - **Deletion model:** Retained until the user clears site data. The app has no delete function.
 
 ## Relationships

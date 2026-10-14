@@ -45,6 +45,7 @@ A single repo with one app. TypeScript in `strict` mode, built and served in dev
 | Layer | Choice | Rationale |
 | --- | --- | --- |
 | Unit/integration | Vitest (`vitest run`, never watch) | Not stated in discovery. |
+| View tests (screens) | Vitest with `jsdom`, chosen per file with the first line `// @vitest-environment jsdom`. Other tests keep the `node` environment. | Screens must be tested without a real browser, and every acceptance criterion needs a test. `jsdom` is a `devDependency` (version 26, works on Node 20 and later), so nothing ships to users. It is the only extra test dependency. Decided by the workshop facilitator, 2026-10-14. |
 | E2E | None | Not stated in discovery. |
 | Test file locations | see § Repository Structure → Test locations | |
 
