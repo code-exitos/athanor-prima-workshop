@@ -17,6 +17,11 @@ describe('entry log', () => {
     expect(listEntries(createMemoryStore())).toEqual([]);
   });
 
+  it('treats unreadable stored data as an empty log', () => {
+    expect(listEntries(createMemoryStore({ 'na.entries.v1': '{not json' }))).toEqual([]);
+    expect(listEntries(createMemoryStore({ 'na.entries.v1': '{"a":1}' }))).toEqual([]);
+  });
+
   it('appends entries in order', () => {
     const store = createMemoryStore();
     appendEntry(store, granted);

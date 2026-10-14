@@ -79,7 +79,7 @@ The verify URL is built from `window.location.origin`, never a fixed host. Its f
 
 ### R-4: The log screen handles an empty log
 
-The log screen shows "No entries yet" when empty. **Export CSV** is disabled when empty.
+The log screen shows "No entries yet" when empty, and lists entries newest first otherwise. **Export CSV** is disabled when empty.
 
 - **Serves:** G-4
 - **Verified by:** US-3, US-4

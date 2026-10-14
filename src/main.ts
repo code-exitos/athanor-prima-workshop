@@ -2,9 +2,10 @@
 
 import './ui/styles.css';
 import { el } from './ui/dom';
+import { renderHeader } from './ui/header';
 import { renderLogView } from './ui/log-view';
 import { renderPassView } from './ui/pass-view';
-import { parseRoute } from './ui/router';
+import { parseRoute, type Route } from './ui/router';
 import { renderVerifyView } from './ui/verify-view';
 
 const app = document.getElementById('app');
@@ -13,30 +14,30 @@ if (!app) {
 }
 const root = app;
 
-function render(): void {
-  const route = parseRoute(window.location.hash, window.location.search);
-  const content = el('main', { id: 'main' });
-  const nav = el(
-    'nav',
-    { 'aria-label': 'Main' },
-    el('span', { class: 'brand' }, 'Contoso HQ · Visitor access'),
-    el('a', route.name === 'pass' ? { href: '#/', 'aria-current': 'page' } : { href: '#/' }, 'New pass'),
-    el('a', route.name === 'log' ? { href: '#/log', 'aria-current': 'page' } : { href: '#/log' }, 'Entry log'),
-  );
+function renderScreen(route: Route, content: HTMLElement): void {
   switch (route.name) {
     case 'pass':
-      renderPassView(content);
-      break;
+      return renderPassView(content);
     case 'log':
-      renderLogView(content);
-      break;
+      return renderLogView(content);
     case 'verify':
-      renderVerifyView(content);
-      break;
-    default:
-      content.replaceChildren(el('h1', {}, 'Page not found'), el('a', { href: '#/' }, 'Go to New pass'));
+      return renderVerifyView(content);
+    case 'not-found':
+      return content.replaceChildren(el('h1', {}, 'Page not found'), el('a', { href: '#/' }, 'Go to New pass'));
   }
-  root.replaceChildren(...(route.name === 'verify' ? [content] : [nav, content]));
+}
+
+function render(): void {
+  const route = parseRoute(window.location.hash, window.location.search);
+  const content = el('main', { id: 'main', class: 'page' });
+  renderScreen(route, content);
+
+  // The guard's verify screen has no header, so the guard sees only the result.
+  root.replaceChildren(
+    route.name === 'verify'
+      ? el('div', { class: 'plain' }, content)
+      : el('div', { class: 'backdrop' }, renderHeader(route, render), content),
+  );
 }
 
 window.addEventListener('hashchange', render);

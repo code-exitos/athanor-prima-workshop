@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { localInputToUtcIso, utcToLocalInput } from './datetime';
+import { formatDateTime, localInputToUtcIso, utcToLocalInput } from './datetime';
 
 describe('localInputToUtcIso', () => {
   it('returns a UTC ISO string for a valid value', () => {
@@ -20,5 +20,11 @@ describe('utcToLocalInput', () => {
     const local = utcToLocalInput(date);
     expect(local).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/);
     expect(localInputToUtcIso(local)).toBe(new Date(Math.floor(date.getTime() / 60000) * 60000).toISOString());
+  });
+});
+
+describe('formatDateTime', () => {
+  it('formats a local time for people to read', () => {
+    expect(formatDateTime(new Date(2026, 5, 2, 10, 5).toISOString())).toBe('2 Jun 2026, 10:05');
   });
 });

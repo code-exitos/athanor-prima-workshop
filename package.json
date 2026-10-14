@@ -2,7 +2,7 @@
   "name": "athanor-prima-workshop",
   "private": true,
   "version": "0.1.0",
-  "description": "Neighborhood Access: visitor passes for a gated community. Workshop demo, demo data only.",
+  "description": "Building Access: visitor passes for Contoso HQ. Workshop demo, demo data only.",
   "type": "module",
   "engines": {
     "node": ">=20.19"

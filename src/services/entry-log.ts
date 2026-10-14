@@ -15,9 +15,18 @@ export interface EntryRecord {
 
 const CSV_COLUMNS = ['at', 'result', 'reason', 'passId', 'building', 'visitorName'] as const;
 
+/** Returns the stored entries, oldest first. Unreadable stored data counts as an empty log. */
 export function listEntries(store: KeyValueStore): EntryRecord[] {
   const raw = store.getItem(ENTRIES_KEY);
-  return raw === null ? [] : (JSON.parse(raw) as EntryRecord[]);
+  if (raw === null) {
+    return [];
+  }
+  try {
+    const parsed: unknown = JSON.parse(raw);
+    return Array.isArray(parsed) ? (parsed as EntryRecord[]) : [];
+  } catch {
+    return [];
+  }
 }
 
 export function appendEntry(store: KeyValueStore, entry: EntryRecord): void {

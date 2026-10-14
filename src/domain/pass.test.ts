@@ -31,12 +31,12 @@ describe('createPass', () => {
   });
 
   it('rejects an unknown or empty building', () => {
-    expect(createPass({ ...validInput, building: '' }, NOW)).toEqual({ ok: false, errors: ['Choose a building.'] });
-    expect(createPass({ ...validInput, building: 'Moon Base' }, NOW)).toEqual({ ok: false, errors: ['Choose a building.'] });
+    expect(createPass({ ...validInput, building: '' }, NOW)).toEqual({ ok: false, errors: { building: 'Choose a building.' } });
+    expect(createPass({ ...validInput, building: 'Moon Base' }, NOW)).toEqual({ ok: false, errors: { building: 'Choose a building.' } });
   });
 
   it('rejects a name that is too short or too long after trimming', () => {
-    const message = ['Name must be 2 to 40 characters.'];
+    const message = { visitorName: 'Name must be 2 to 40 characters.' };
     expect(createPass({ ...validInput, visitorName: ' A ' }, NOW)).toEqual({ ok: false, errors: message });
     expect(createPass({ ...validInput, visitorName: 'x'.repeat(41) }, NOW)).toEqual({ ok: false, errors: message });
     expect(createPass({ ...validInput, visitorName: 'x'.repeat(40) }, NOW).ok).toBe(true);
@@ -44,12 +44,25 @@ describe('createPass', () => {
 
   it('rejects an end before the start', () => {
     const result = createPass({ ...validInput, validUntil: '2026-06-01T10:00:00.000Z' }, NOW);
-    expect(result).toEqual({ ok: false, errors: ['End must not be before start.'] });
+    expect(result).toEqual({ ok: false, errors: { validUntil: 'End must not be before start.' } });
   });
 
   it('rejects an end in the past', () => {
     const result = createPass({ ...validInput, validFrom: '2026-05-01T10:00:00.000Z', validUntil: '2026-05-02T10:00:00.000Z' }, NOW);
-    expect(result).toEqual({ ok: false, errors: ['End must not be in the past.'] });
+    expect(result).toEqual({ ok: false, errors: { validUntil: 'End must not be in the past.' } });
+  });
+
+  it('reports every invalid field at once', () => {
+    const result = createPass({ building: '', visitorName: '', validFrom: 'nope', validUntil: '' }, NOW);
+    expect(result).toEqual({
+      ok: false,
+      errors: {
+        building: 'Choose a building.',
+        visitorName: 'Name must be 2 to 40 characters.',
+        validFrom: 'Enter a valid start date.',
+        validUntil: 'Enter a valid end date.',
+      },
+    });
   });
 
   it('accepts an end equal to the start', () => {

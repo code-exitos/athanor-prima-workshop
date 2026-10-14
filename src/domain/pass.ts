@@ -20,9 +20,13 @@ export interface PassInput {
   readonly visitorName: string;
 }
 
+export type FieldName = 'building' | 'visitorName' | 'validFrom' | 'validUntil';
+/** One message per field, so the screen can show each one next to its field. */
+export type FieldErrors = Partial<Record<FieldName, string>>;
+
 export type CreatePassResult =
   | { readonly ok: true; readonly pass: Pass }
-  | { readonly ok: false; readonly errors: readonly string[] };
+  | { readonly ok: false; readonly errors: FieldErrors };
 
 export const NAME_MIN_LENGTH = 2;
 export const NAME_MAX_LENGTH = 40;
@@ -31,29 +35,27 @@ function isBuilding(value: string): value is Building {
   return (BUILDINGS as readonly string[]).includes(value);
 }
 
-function parseTime(iso: string): number {
-  return Date.parse(iso);
-}
-
-function validateInput(input: PassInput, now: Date): string[] {
-  const errors: string[] = [];
-  const name = input.visitorName.trim();
+function validateInput(input: PassInput, now: Date): FieldErrors {
+  const errors: FieldErrors = {};
+  const nameLength = input.visitorName.trim().length;
+  const from = Date.parse(input.validFrom);
+  const until = Date.parse(input.validUntil);
 
   if (!isBuilding(input.building)) {
-    errors.push('Choose a building.');
+    errors.building = 'Choose a building.';
   }
-  if (name.length < NAME_MIN_LENGTH || name.length > NAME_MAX_LENGTH) {
-    errors.push(`Name must be ${NAME_MIN_LENGTH} to ${NAME_MAX_LENGTH} characters.`);
+  if (nameLength < NAME_MIN_LENGTH || nameLength > NAME_MAX_LENGTH) {
+    errors.visitorName = `Name must be ${NAME_MIN_LENGTH} to ${NAME_MAX_LENGTH} characters.`;
   }
-
-  const from = parseTime(input.validFrom);
-  const until = parseTime(input.validUntil);
-  if (Number.isNaN(from) || Number.isNaN(until)) {
-    errors.push('Enter a valid start and end date.');
-  } else if (until < from) {
-    errors.push('End must not be before start.');
+  if (Number.isNaN(from)) {
+    errors.validFrom = 'Enter a valid start date.';
+  }
+  if (Number.isNaN(until)) {
+    errors.validUntil = 'Enter a valid end date.';
+  } else if (!Number.isNaN(from) && until < from) {
+    errors.validUntil = 'End must not be before start.';
   } else if (until < now.getTime()) {
-    errors.push('End must not be in the past.');
+    errors.validUntil = 'End must not be in the past.';
   }
   return errors;
 }
@@ -61,7 +63,7 @@ function validateInput(input: PassInput, now: Date): string[] {
 /** Validates the input and builds a pass. `now` is passed in so the rule stays testable. */
 export function createPass(input: PassInput, now: Date): CreatePassResult {
   const errors = validateInput(input, now);
-  if (errors.length > 0 || !isBuilding(input.building)) {
+  if (Object.keys(errors).length > 0 || !isBuilding(input.building)) {
     return { ok: false, errors };
   }
   return {

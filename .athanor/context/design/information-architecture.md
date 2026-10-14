@@ -28,7 +28,7 @@ Status: Approved
 
 - **Purpose:** Let the administrator review entry attempts and export them. Route `#/log`. Audience: administrator (P-1). Feature: F-4.
 - **Primary actions:** Read the table. Press **Export CSV**.
-- **Data shown:** Table with time, result, reason, pass id, building and visitor name. Empty state: "No entries yet". Nothing writes entries until F-3 is built.
+- **Data shown:** Table with time, result, reason, pass id (first 8 characters), building and visitor name, newest first. The result is always a word (Granted or Denied) with an icon. Empty state: "No entries yet". Nothing writes entries until F-3 is built.
 
 ### PG-3: Verify
 

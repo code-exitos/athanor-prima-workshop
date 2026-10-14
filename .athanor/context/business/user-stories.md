@@ -164,7 +164,7 @@ Entries are stored on one device only (E-4 Entry log, `.athanor/context/engineer
 #### Acceptance Criteria
 
 - **AC-1:** Given no entries are stored, when I open `#/log`, then I see "No entries yet".
-- **AC-2:** Given entries are stored, when I open `#/log`, then I see them listed.
+- **AC-2:** Given entries are stored, when I open `#/log`, then I see them listed, newest first.
 
 #### Edge Cases
 

@@ -14,3 +14,17 @@ export function utcToLocalInput(date: Date): string {
   const pad = (value: number): string => String(value).padStart(2, '0');
   return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
 }
+
+const DISPLAY_FORMAT = new Intl.DateTimeFormat('en-GB', {
+  day: 'numeric',
+  month: 'short',
+  year: 'numeric',
+  hour: '2-digit',
+  minute: '2-digit',
+  hour12: false,
+});
+
+/** Formats an ISO time for people to read, in local time, for example "2 Jun 2026, 10:05". */
+export function formatDateTime(iso: string): string {
+  return DISPLAY_FORMAT.format(new Date(iso));
+}
