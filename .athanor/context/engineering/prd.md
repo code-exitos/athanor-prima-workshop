@@ -94,7 +94,7 @@ The policy is applied in this order. It stops at the first failure.
 
 1. Signature valid.
 2. Blocklist check. It overrides every later rule, including a valid pass.
-3. Validity window.
+3. Validity window: from `validFrom` up to and including `validUntil` (D-1).
 4. One-time ledger check.
 5. Grant or deny with a specific reason. Every attempt is logged.
 
@@ -173,12 +173,15 @@ These come from the discovery packet. Change them if wrong.
 - The blocklist is a fake list in `src/data/blocklist.ts`. It is demo data. How a real list would reach every phone is out of scope for this demo.
 - Blocklist matching is by visitor alias, because aliases are all we store.
 
-Open questions. They are **not resolved**. Resolve them when specifying F-3.
+## Decisions
 
-1. **End date.** The bylaws say a pass is valid "until" the end date. Is that instant included or not?
-2. **Revocation.** Who may revoke a pass: the resident, the administrator, the guard? How does a revocation reach a device with no server?
-3. **Domestic staff.** Mentioned once, with no rules. Out of scope until the board gives rules (F-6).
-4. **Typed code vs QR.** The guard wants a short typed code. The board wants QR. The resident wants a link. Which are supported?
+These settle the points the discovery packet left unclear. Decided by the workshop facilitator in the product owner role, on 2026-10-14, taking the recommended (easy and logical) option each time. Change them if wrong.
+
+- **D-1 End date is included.** A pass is valid from `validFrom` up to and including `validUntil`. A verification at exactly `validUntil` is granted. Reason: the bylaws say valid "until" the end date (Art. 18), and pass creation already accepts an end date equal to now (`src/domain/pass.ts`).
+- **D-2 No revoke feature.** A pass stops working when it expires, and a one-time pass stops when used. To stop a visitor sooner, the administrator adds the visitor alias to the blocklist (E-3). Residents and guards cannot revoke. Reason: there is no server (ADR 0001), and the blocklist already overrides every pass.
+- **D-3 Domestic staff are out of scope (F-6).** No special handling in this version. Reason: the bylaws give no rules (Art. 23).
+- **D-4 QR code and link only, no typed code.** The QR code and the link carry the same signed token. Reason: the token is self-contained and signed (ADR 0001). A short typed code would need a server to look it up.
+- **D-5 Unused passes are not visible.** The entry log shows verification attempts only. Reason: the app does not store passes (E-1).
 
 ## Risks
 

@@ -43,7 +43,7 @@ Status: Approved
 2. The verify page (PG-3) runs the **verification policy**, in this order:
    1. The signature is valid.
    2. The visitor alias is not on the blocklist. The blocklist overrides everything after it.
-   3. The current time is inside the pass validity window.
+   3. The current time is inside the pass validity window. The end date is included (`prd.md`, D-1).
    4. For a one-time pass, the pass has not been used before (ledger check).
    5. Grant or deny, with a specific reason.
 3. Every attempt, granted or denied, is written to the entry log.
@@ -51,7 +51,7 @@ Status: Approved
 
 ### Alternate Paths
 
-- **The guard prefers typing a short code to scanning:** Not resolved. See the open questions in `.athanor/context/engineering/prd.md`.
+- **The guard prefers typing a short code to scanning:** Not supported in this version. The guard opens the QR code or the link (`.athanor/context/engineering/prd.md`, D-4).
 
 ### Failure / Recovery Paths
 

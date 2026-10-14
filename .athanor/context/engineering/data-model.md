@@ -29,7 +29,7 @@ erDiagram
 | `unit` | string | Required | One of the 12 demo units |
 | `type` | `"one-time"` or `"date-range"` | Required | |
 | `validFrom` | string | Required | ISO 8601 UTC |
-| `validUntil` | string | Required. Must not be before `validFrom`. | ISO 8601 UTC. Whether this instant is inside the window is an open question (`prd.md`, open question 1). |
+| `validUntil` | string | Required. Must not be before `validFrom`. | ISO 8601 UTC. This instant is inside the window (`prd.md`, D-1). |
 | `visitorAlias` | string | Required, 2 to 24 characters after trimming | Nickname or initials. Never a legal name. |
 
 - **Ownership / source of truth:** The resident's browser creates it (`createPass` in `src/domain/pass.ts`). The signed token is the only copy.
@@ -47,7 +47,7 @@ The token is `base64url(JSON payload) + "." + base64url(signature)`. A verifier 
 
 - **Ownership / source of truth:** Signed in the resident's browser (`src/services/signing.ts`) with the demo private key in `src/data/demo-keys.ts`.
 - **Lifecycle:** Created and signed by F-1. Shown as a QR code and as a verify link by F-2. Never stored by the app.
-- **Deletion model:** Not stored by the app. A shared token cannot be recalled (revocation is an open question in `prd.md`).
+- **Deletion model:** Not stored by the app. A shared token cannot be recalled. There is no revoke feature; the administrator uses the blocklist instead (`prd.md`, D-2).
 
 ### E-3: Blocklist
 

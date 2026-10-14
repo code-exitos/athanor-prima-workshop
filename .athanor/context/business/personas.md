@@ -62,7 +62,7 @@ Three personas, built only from `.athanor/docs/discovery/`. First names are the 
 ### Behaviors
 
 - Opens the pass the visitor shows and reads the result.
-- Prefers typing a short code to scanning (see open questions in `.athanor/context/engineering/prd.md`).
+- Prefers typing a short code to scanning. This version supports the QR code and the link only (`.athanor/context/engineering/prd.md`, D-4).
 
 ### Constraints
 
@@ -102,7 +102,8 @@ Three personas, built only from `.athanor/docs/discovery/`. First names are the 
 
 ### Constraints
 
-- Not stated in discovery.
+- Cannot see passes that were created but never used. The app does not store passes (`.athanor/context/engineering/prd.md`, D-5).
+- Cannot revoke a single pass. She stops a visitor by adding the alias to the blocklist (D-2).
 
 ### What Success Looks Like
 
@@ -112,10 +113,3 @@ Three personas, built only from `.athanor/docs/discovery/`. First names are the 
 
 - J-3
 - J-4
-
----
-
-## Open Questions
-
-- Do guards or the administrator revoke passes? The discovery material does not say.
-- Does the administrator need to see passes that were created but never used? Not stated.
