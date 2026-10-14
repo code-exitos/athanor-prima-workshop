@@ -1,34 +1,28 @@
 ---
 title: Stakeholder notes
-source: Three short conversations, 2026-09-04 to 2026-09-09
+source: Two short conversations, 2026-09-04 to 2026-09-09
 date: 2026-09-09
 ---
 
 # Stakeholder notes
 
-Short notes from three conversations. They are not a requirements list.
+Short notes from two conversations. They are not a requirements list. All people are fictional.
 
-## Administrator (Marissa, board-appointed, works in the office on weekdays)
+## Administrator (Marissa, facilities administrator, works in the facilities office on weekdays)
 
-- Wants a QR code. The board saw QR codes at a nearby community and liked them. "It looks modern and the board will approve it faster."
+- Creates visitor passes. For each pass she needs to choose the building the visitor may enter, the dates, and the visitor's name.
+- Wants a QR code shown on her screen when she creates the pass. "It looks modern and security will approve it faster."
+- Said that one day the QR code could be emailed to the visitor. "That is for a later version."
 - Wants a report of entries she can open in a spreadsheet at month end.
-- Handles complaints. Said "if a resident has a problem with a visitor, I deal with it" and that she keeps the list of people who are banned.
-- Mentioned once, in passing: "Then there is the domestic staff, the maids and gardeners, they come every week, but that is another story."
+- Handles complaints. Said "if a department has a problem with a visitor, I deal with it" and that she keeps the list of people who are banned.
 
-## Guard (Ed, night shift at the main gate)
+## Guard (Ed, lobby security guard, works shifts at the Main Tower lobby)
 
-- Has a phone with a small screen. It is an older Android phone he bought himself.
-- Does not like cameras. "Last time I scanned a code the screen was cracked and it took a minute. I would rather type a short code, six or eight characters, and see a green or red screen."
-- Works in a booth.
-- Wants the answer to be big and obvious. "I do not want to read small text at 3 am."
+- Uses a company phone. He is happy to scan a QR code with the phone camera.
+- Wants a clear answer right after the scan: a big green screen or a big red screen. "I do not want to read small text."
+- Wants the red screen to say why. "If I have to turn someone away, I need to tell them the reason."
+- Does not create passes and does not edit the banned list.
 
-## Resident (Lucy, lives in section 7, has two children and visits from relatives)
+## Where they agree
 
-- Wants to create a pass in under a minute from her phone.
-- Wants a link she can send by text message. "I do not want to send a picture and explain it."
-- Does not want her guests' full names stored. "My mother-in-law should not be in a system."
-- Wants passes for a single visit (a delivery, a plumber) and passes for a weekend.
-
-## Where they differ
-
-The administrator wants QR, the guard wants a typed code, the resident wants a link. Nobody has talked to the other two about this.
+Both want the pass to be a QR code. Nobody asked for typed codes, links or accounts.

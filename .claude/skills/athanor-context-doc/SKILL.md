@@ -43,10 +43,10 @@ At most 3 rounds of at most 3 questions. Cover: goals and frustrations per perso
 
 ### 4. Proactive suggestions
 Flag conflicts and gaps in the sources and propose how to handle each:
-- typed code versus QR code (who wants what);
-- "valid until" with no statement about the end date;
-- the single mention of domestic staff;
-- who may revoke a pass.
+- "valid until" with no statement about whether the end date is included;
+- who may revoke a pass, and how, with no server;
+- the one mention of emailing the QR code to the visitor (a later version);
+- what the guard should see on a denied pass (a reason or not).
 Suggest at least one anti-persona. Resolve each flag with the user now: propose the recommended option (the easy or logical one) with its consequence, and record the result in the persona it affects (Pain Points, Behaviors or Constraints). Do not leave open questions in the document.
 
 ### 5. Draft

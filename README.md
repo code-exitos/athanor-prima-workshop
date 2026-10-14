@@ -1,10 +1,10 @@
-# Athanor Prima Workshop: Neighborhood Access
+# Athanor Prima Workshop: Building Access
 
-A 45-minute hands-on workshop. You use Claude Code along with a trimmed down version of the Athanor Method, a context-aware spec-driven SDLC meta-framework to build part of a small product, **Neighborhood Access**: visitor passes for a gated community.
+A 45-minute hands-on workshop. You use Claude Code along with a trimmed down version of the Athanor Method, a context-aware spec-driven SDLC meta-framework to build part of a small product, **Building Access**: visitor passes for Contoso HQ, a fictional company campus.
 
-A resident creates a pass. The app signs it and shows a QR code that holds a link. A guard opens the link and sees a full-screen green **ACCESS GRANTED** or red **ACCESS DENIED**. There is no backend.
+An administrator picks a building, the dates and a visitor name. The app signs a pass and shows it as a QR code. A guard scans the QR code with a phone and sees a full-screen green **ACCESS GRANTED** or red **ACCESS DENIED**. There is no backend.
 
-> **Demo data notice:** all data and keys in this repo are demo data and demo keys, not for production. Names, units, the blocklist and the signing key pair are fake. Never put real personal data or real keys in this repo.
+> **Demo data notice:** all data and keys in this repo are demo data and demo keys, not for production. Names, buildings, the blocklist and the signing key pair are fake. Never put real personal data or real keys in this repo.
 
 ## Quick start
 
@@ -12,7 +12,7 @@ A resident creates a pass. The app signs it and shows a QR code that holds a lin
 2. Click **Use this template** → **Create a new repository**.
 3. Set **Owner** to your account, name it `prima-access`, choose **Private**, and **tick "Include all branches."** Click **Create repository**.
 4. In your new repo, click **Code → Codespaces → Create codespace on checkpoint-1**. Wait 1 to 2 minutes.
-5. In the terminal run `bash scripts/workshop-check.sh` and fix any ✘ it shows. Then type `claude` and log in with your Claude account.
+5. The terminal runs the setup check by itself, then starts Claude Code. Fix any ✘ it shows, then log in with your Claude account. (If Claude did not start, run `bash scripts/workshop-check.sh`.)
 6. Talk to Claude in plain words. Three prompts, in order (see **Moving between checkpoints** for the switch):
    1. On `checkpoint-1`: `Help me draft the user personas document.`
    2. On `checkpoint-2`: `Lets spec the issues for feature 3.`

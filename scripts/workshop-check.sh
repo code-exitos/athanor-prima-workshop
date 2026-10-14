@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Workshop setup check. Run it once after you open your Codespace:  bash scripts/workshop-check.sh
+# Workshop setup check. It runs by itself when the Codespace opens, then starts Claude Code.
+# To run it again by hand:  bash scripts/workshop-check.sh
 # Prints a check mark or a cross per check, with the exact fix, and exits non-zero on failure.
 # Works in Codespaces, macOS, Linux and Git Bash.
 
@@ -141,12 +142,20 @@ fi
 echo
 if [ "$FAILED" = 0 ]; then
   CURRENT=$(git branch --show-current)
-  echo "Ready. You are on branch '${CURRENT:-unknown}'. Type 'claude', then:"
   if [ "$CURRENT" = "checkpoint-2" ]; then
-    echo '  Lets spec the issues for feature 3.'
+    FIRST_PROMPT='Lets spec the issues for feature 3.'
   else
-    echo '  Help me draft the user personas document.'
+    FIRST_PROMPT='Help me draft the user personas document.'
   fi
+  echo "Ready. You are on branch '${CURRENT:-unknown}'. When Claude Code opens, type:"
+  echo "  $FIRST_PROMPT"
+  # Start Claude Code when this script runs in a real terminal. Set WORKSHOP_NO_CLAUDE=1 to skip.
+  if [ -t 0 ] && [ -t 1 ] && [ -z "${WORKSHOP_NO_CLAUDE:-}" ] && command -v claude >/dev/null 2>&1; then
+    echo
+    echo "Starting Claude Code..."
+    exec claude
+  fi
+  echo "Type 'claude' to start Claude Code."
   exit 0
 fi
 echo "Not ready. Fix the items marked ✘ above, then run this script again."

@@ -4,26 +4,22 @@ Status: Approved
 
 # Problem Statement
 
-Guards at Tartan Fields record visitors in a paper notebook. They often cannot confirm with a resident whether a visitor is expected, and the notebook cannot be searched. Residents, guards and the board feel this: residents want their visitors to enter without delay, guards must decide at the gate (often at night, with a basic phone), and the administrator and board must answer for what happens there. The board cannot quickly see who entered and cannot reliably stop banned people from entering. The first version must work on a small budget, with no server, on mixed phone types, and without identifying visitors by real name (source: `.athanor/docs/discovery/constraints.md`).
+Visitors at Contoso HQ sign a paper log at the lobby. Guards often cannot confirm with the employee host whether a visitor is expected, and the paper log cannot be searched. Two people feel this: the facilities administrator, who must answer for who entered which building, and the guards, who must decide at the lobby. Security cannot quickly see who entered and cannot reliably stop banned people from entering. The first version must work on a small budget, with no server, on company phones and a laptop, and without storing real visitor names (source: `.athanor/docs/discovery/constraints.md`).
 
 ## Goals
 
-<!-- Every goal is coded G-# (see context-doc-coding-scheme.md in the athanor-context-doc skill);
-features.md and the PRD's requirements reference a goal by this code, so keep it stable once
-assigned. -->
-
-- **G-1:** A resident can create a visitor pass in under one minute.
+- **G-1:** An administrator can create a visitor pass in under one minute.
 - **G-2:** A guard can decide "allow" or "deny" in a few seconds, with a clear result.
 - **G-3:** Banned people never enter, even with a valid pass.
-- **G-4:** The board can review who entered and who was refused.
+- **G-4:** The facilities team can review who entered and who was refused.
 - **G-5:** The first version runs with no server and almost no running cost.
 
 ## Success Metrics
 
-### M-1: Notebook retired
+### M-1: Paper log retired
 
-- **Definition:** Whether the paper notebook is still used at the gate. The data source is not yet defined.
-- **Target:** Notebook retired within three months of launch.
+- **Definition:** Whether the paper log is still used at the lobby. The data source is not yet defined.
+- **Target:** Paper log retired within three months of launch.
 - **Measures:** G-4
 
 ### M-2: Guard decision time
@@ -40,7 +36,7 @@ assigned. -->
 
 ## Non-Goals
 
-- **NG-1:** Real resident accounts or sign-in. Out of scope for the first version.
-- **NG-2:** Recurring access for domestic staff. Out of scope for the first version.
-- **NG-3:** Payments, messaging, or camera-based plate reading. Out of scope for the first version.
-- **NG-4:** A server and notifications. Out of scope for now (source: former "Out of scope for now" section of the vision).
+- **NG-1:** Sign-in or user accounts. There are only two users, the administrator and the guard, and the first version has no login.
+- **NG-2:** Sending the pass to the visitor, for example by email. A full version could do this. Out of scope for the first version.
+- **NG-3:** Payments, messaging, or camera-based face or plate recognition. Out of scope for the first version.
+- **NG-4:** A server and notifications. Out of scope for now.
