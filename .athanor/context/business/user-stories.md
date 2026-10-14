@@ -49,7 +49,7 @@ Building is one of four. The visitor name is 2 to 40 characters after trimming. 
 
 - **Journey:** J-1
 - **IA page:** PG-1
-- **UI Design Prompt:** UIP-1, `.athanor/context/design/ui/building-access.md` (administrator screen).
+- **UI Design Prompt:** UIP-1, `.athanor/context/design/ui-design-prompt.md` (administrator screen).
 
 #### Dependencies
 
@@ -110,7 +110,7 @@ The QR code encodes the verify URL, `<origin><path>?p=<token>`, built from `wind
 
 - **Journey:** J-1
 - **IA page:** PG-1
-- **UI Design Prompt:** UIP-1, `.athanor/context/design/ui/building-access.md` (administrator screen).
+- **UI Design Prompt:** UIP-1, `.athanor/context/design/ui-design-prompt.md` (administrator screen).
 
 #### Dependencies
 
@@ -174,7 +174,7 @@ Entries are stored on one device only (E-4 Entry log, `.athanor/context/engineer
 
 - **Journey:** J-3
 - **IA page:** PG-2
-- **UI Design Prompt:** UIP-1, `.athanor/context/design/ui/building-access.md` (entry log screen).
+- **UI Design Prompt:** UIP-1, `.athanor/context/design/ui-design-prompt.md` (entry log screen).
 
 #### Dependencies
 
@@ -230,7 +230,7 @@ Open `#/log` with and without entries and check the **Export CSV** button.
 
 - **Journey:** J-3
 - **IA page:** PG-2
-- **UI Design Prompt:** UIP-1, `.athanor/context/design/ui/building-access.md` (entry log screen).
+- **UI Design Prompt:** UIP-1, `.athanor/context/design/ui-design-prompt.md` (entry log screen).
 
 #### Dependencies
 
