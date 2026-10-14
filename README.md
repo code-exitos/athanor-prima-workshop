@@ -1,6 +1,6 @@
 # Athanor Prima Workshop: Neighborhood Access
 
-A 45-minute hands-on workshop. You use Claude Code and a spec-driven, human-in-the-loop method to build part of a small product, **Neighborhood Access**: visitor passes for a gated community (*Residencial Los Pinos*).
+A 45-minute hands-on workshop. You use Claude Code along with a trimmed down version of the Athanor Method, a context-aware spec-driven SDLC meta-framework to build part of a small product, **Neighborhood Access**: visitor passes for a gated community.
 
 A resident creates a pass. The app signs it and shows a QR code that holds a link. A guard opens the link and sees a full-screen green **ACCESS GRANTED** or red **ACCESS DENIED**. There is no backend.
 
