@@ -4,7 +4,7 @@
 # Prints a check mark or a cross per check, with the exact fix, and exits non-zero on failure.
 # Works in Codespaces, macOS, Linux and Git Bash.
 
-# HTTPS clone URL of the facilitator's template repo.
+# HTTPS clone URL of the workshop template repo.
 # Update this if the template repo is renamed or moved.
 WORKSHOP_UPSTREAM="https://github.com/code-exitos/athanor-prima-workshop.git"
 # Older names of the same repo (GitHub redirects renamed repos, so origin may show either one).
@@ -46,7 +46,7 @@ for alias in $WORKSHOP_UPSTREAM_ALIASES; do
   [ "$SLUG" = "$(printf '%s' "$alias" | tr '[:upper:]' '[:lower:]')" ] && IS_UPSTREAM=1
 done
 if [ "$IS_UPSTREAM" = 1 ]; then
-  bad "You opened the facilitator's repo ($SLUG), not your own copy." \
+  bad "You opened the workshop template repo ($SLUG), not your own copy." \
       "Nothing was changed. Create your own copy first:" \
       "1. Open ${WORKSHOP_UPSTREAM%.git} in your browser." \
       "2. Click 'Use this template' > 'Create a new repository'." \
@@ -80,7 +80,7 @@ else
 fi
 
 # 3. Branches (self-heal when 'Include all branches' was skipped) ---------------------
-# Safe: this only runs after check 2, so it can never push to the facilitator's repo.
+# Safe: this only runs after check 2, so it can never push to the workshop template repo.
 ADDED_REMOTE=0
 for branch in checkpoint-1 checkpoint-2; do
   if git rev-parse --verify -q "refs/remotes/origin/$branch" >/dev/null; then

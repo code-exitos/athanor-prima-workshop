@@ -53,7 +53,7 @@ Then run `npm install` once on `checkpoint-2`, and type `claude` again if you cl
 | Phone cannot open the verify link | In the **Ports** tab, right-click port 5173 → **Port Visibility** → **Public**. Then scan the QR code again. |
 | No browser popup | Open the **Ports** tab, find port 5173, and click the globe icon. |
 | Codespace is blocked or out of free hours | Use a personal account, check <https://github.com/settings/billing>, or use **Running locally** below. |
-| Script says you opened the facilitator's repo | Create your own copy with **Use this template** (steps 1 to 3). |
+| Script says you opened the workshop's repo | Create your own copy with **Use this template** (steps 1 to 3). |
 | Issues are disabled | Your repo → Settings → General → Features → tick **Issues**. |
 
 ## Running locally (fallback)
@@ -96,13 +96,6 @@ All Athanor method files live in `.athanor/`:
 - `.athanor/docs/adr/`: architecture decisions (on `checkpoint-2`).
 - `.athanor/temp/`: scratch space for the agent. Keep it empty in commits.
 - `.claude/skills/`: `athanor-context-doc`, `athanor-spec-issue`, `athanor-work-review`.
-
-## Facilitator note
-
-- The repo must be **public** and marked as a template (Settings → General → Template repository).
-- `checkpoint-1` must be the default branch.
-- `WORKSHOP_UPSTREAM` in `scripts/workshop-check.sh` must match this repo's URL. Update it if the repo is renamed.
-- Do a timed dry run on a fresh personal account before the session.
 
 ## License
 
