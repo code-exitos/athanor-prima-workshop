@@ -12,7 +12,7 @@ Goal: all stories of one Feature built test-first on one branch, reviewed once o
 Rules for this skill:
 - Pin the target: `REPO=<owner>/<name>` from `git remote get-url origin`; `--repo "$REPO"` on every `gh` command; explicit `--base` and `--head` on the PR. Owner must equal `gh api user -q .login` or an org the user belongs to; otherwise STOP and tell the user to create their own copy from the template.
 - The approval in step 2 covers local commits only. The push and the PR need a separate yes in step 7, after the user has seen the title, body and review result.
-- Never close issues (the merge does). Never merge the PR without an explicit yes from the user (step 7). Never use `--admin` or auto-merge. Never force-push.
+- Do not close issues before the merge: the workflow `.github/workflows/close-linked-issues.yml` closes every issue named after `Closes #` in the PR body when the PR merges, into any branch. If an issue is still open after the merge, close it only after the user says yes. Never merge the PR without an explicit yes from the user (step 7). Never use `--admin` or auto-merge. Never force-push.
 - If an acceptance criterion is ambiguous or conflicts with a context doc or ADR: STOP, show the conflict, ask. Log the user's decision as an assumption comment on the issue.
 
 ## Steps
@@ -50,9 +50,9 @@ Apply `review-checklist.md` to `git diff origin/<base>...HEAD`. Report findings,
 1. Show the diff summary, review result, PR title, body preview, and target (`--repo`, `--base`, `--head`). Ask for an explicit yes before pushing.
 2. `git push -u origin <branch>`, then `gh pr create --repo "$REPO" --base <base> --head <branch> --title "<title>" --body-file <file>`.
 3. Body: use the PR Description Template sections in order: Summary, Linked Issue(s) (`Closes #<parent>` and `Closes #<story>` per story), Changes, Test Plan (the AC-to-test table and test results), Review Notes (review summary, finding status, decisions and assumptions, how to demo with `npm run dev`).
-4. Say: GitHub auto-closes issues only when a PR merges into the DEFAULT branch. In workshop copies the default is `checkpoint-1` and this PR targets `checkpoint-2`, so offer to close the issues by hand after the user merges.
+4. Say: GitHub itself closes `Closes #n` issues only when a PR merges into the DEFAULT branch, and in workshop copies the default is `checkpoint-1` while this PR targets `checkpoint-2`. The workflow `close-linked-issues.yml` covers that gap: when the PR merges, it closes the Feature and every story named after `Closes #` in the PR body. So the PR body must name every issue with `Closes #<n>` on its own line.
 5. Print the PR URL, then `gh pr checks <n> --repo "$REPO"`.
-6. Ask: "Merge this PR into `<base>`?" Merge only after an explicit yes in the user's next message, with `gh pr merge <n> --repo "$REPO" --merge`. Do not merge if checks fail or a Critical or High finding is open: say why and stop. If the user says no or does not answer, leave the PR open. After a merge, offer to close the issues by hand (item 4).
+6. Ask: "Merge this PR into `<base>`?" Merge only after an explicit yes in the user's next message, with `gh pr merge <n> --repo "$REPO" --merge`. Do not merge if checks fail or a Critical or High finding is open: say why and stop. If the user says no or does not answer, leave the PR open. After the merge (whether you ran it or the user merged on GitHub), wait about 20 seconds, then run `gh issue view <n> --repo "$REPO" --json state -q .state` for the Feature and each story. Report which are closed. If any is still open, show the list and close them with `gh issue close <n> --repo "$REPO" --reason completed` only after the user says yes.
 
 ### 8. Wrap up
 Tell the user how to demo the feature (`npm run dev`, open the verify link) and what remains.
