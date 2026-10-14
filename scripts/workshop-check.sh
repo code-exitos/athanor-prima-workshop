@@ -143,9 +143,9 @@ if [ "$FAILED" = 0 ]; then
   CURRENT=$(git branch --show-current)
   echo "Ready. You are on branch '${CURRENT:-unknown}'. Type 'claude', then:"
   if [ "$CURRENT" = "checkpoint-2" ]; then
-    echo '  Use the Athanor workshop skill to spec the feature "Guard verifies a pass from the QR link".'
+    echo '  Lets spec the issues for feature 3.'
   else
-    echo '  Use the Athanor workshop skill to draft the personas document.'
+    echo '  Help me draft the user personas document.'
   fi
   exit 0
 fi

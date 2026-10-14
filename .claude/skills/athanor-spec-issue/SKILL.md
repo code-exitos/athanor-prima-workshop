@@ -1,6 +1,6 @@
 ---
 name: athanor-spec-issue
-description: Spec a Feature plus up to 3 User Story sub-issues in the user's own GitHub repo, co-created with the user. Use when the user says "spec the feature", "write the issues for ...", or "use the Athanor workshop skill to spec ...". Do NOT use to implement code (use athanor-work-review) or to draft personas.
+description: Spec a Feature plus up to 3 User Story sub-issues in the user's own GitHub repo, co-created with the user. Use when the user says "lets spec the issues for feature 3", "spec the feature", "write the issues for ...", or "use the Athanor workshop skill to spec ...". Do NOT use to implement code (use athanor-work-review) or to draft personas.
 ---
 
 WORKSHOP EDITION: a condensed subset of a larger method. For workshop use only.
@@ -27,7 +27,7 @@ Rules for this skill:
 In a few lines: a Feature is the outcome; a User Story sub-issue is one slice a person can build and test; specs come before code because the tests are written from them. "Well specified" means: traceable (cites docs), testable (Given/When/Then), unambiguous, sized, ordered.
 
 ### 2. Locate the feature
-Find it in `docs/context/business/features.md`. Read the PRD, personas, journeys, data model, architecture, brand guidelines and `docs/adr/`. Check for duplicates: `gh issue list --repo "$REPO" --state all --search "<keywords>"`. If one exists, offer to refine it instead of creating a new one.
+Find it in `docs/context/business/features.md`. "Feature 3" means F-03 in that file, not GitHub issue #3. Read the PRD, personas, journeys, data model, architecture, brand guidelines and `docs/adr/`. Check for duplicates: `gh issue list --repo "$REPO" --state all --search "<keywords>"`. If one exists, offer to refine it instead of creating a new one.
 
 ### 3. Decision round
 List the PRD "Open questions and assumptions" that affect this feature (for example: is the end date inclusive; who can revoke; behavior with no signal; typed code versus QR; domestic staff). For each give 2 options, a recommendation, and its consequences. Batches of at most 3. Record each decision with rationale, who decided, and the date.

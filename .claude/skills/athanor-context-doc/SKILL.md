@@ -1,6 +1,6 @@
 ---
 name: athanor-context-doc
-description: Co-create a context document with the user. Use when the user says "draft the personas document", "create a context document", or "use the Athanor workshop skill to draft personas". Workshop edition supports personas only. Do NOT use to write issues, code, or any other document type.
+description: Co-create a context document with the user. Use when the user says "help me draft the user personas document", "draft the personas", "create a context document", or "use the Athanor workshop skill to draft personas". Workshop edition supports personas only. Do NOT use to write issues, code, or any other document type.
 ---
 
 WORKSHOP EDITION: a condensed subset of a larger method. For workshop use only.
@@ -57,4 +57,4 @@ Fill the template. Show the full document in chat and ask what to change or whet
 After the user agrees, write `docs/context/business/personas.md` with `status: Draft`, `owner` from `git config user.name`, and `last_updated` set to today. Set `status: Approved` only after the user says explicitly that they approve. Offer to run `git add` and `git commit` (message: `docs: add personas`). Never push.
 
 ### 7. Wrap up
-Summarize decisions, open questions and assumptions, and what this unlocks next: `git switch checkpoint-2`, then "spec the feature".
+Summarize decisions, open questions and assumptions, and what this unlocks next. Say: "To go on, commit this file, run `git switch checkpoint-2`, then ask me: lets spec the issues for feature 3." Note that checkpoint-2 already has its own approved personas, so this step was practice.
