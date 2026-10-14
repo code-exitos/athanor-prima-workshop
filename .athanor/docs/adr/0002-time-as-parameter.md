@@ -13,7 +13,7 @@ Pass rules depend on the current time. Code that reads the clock inside is hard 
 
 ## Decision
 
-Domain functions never read the clock. They receive `now` as a parameter, as in `createPass(input, now)` and `verifyPass(token, now, ledger, blocklist, publicKey)`. Only the UI layer creates the current date and passes it in. Nothing in `src/domain` calls `Date.now()` or `new Date()` without an argument.
+Domain functions never read the clock. They receive `now` as a parameter, as in `createPass(input, now)` and `verifyPass(token, now, blocklist, publicKey)`. Only the UI layer creates the current date and passes it in. Nothing in `src/domain` calls `Date.now()` or `new Date()` without an argument.
 
 ## Consequences
 

@@ -6,50 +6,59 @@ Status: Approved
 
 ## Must Have
 
-### F-1: Resident creates pass
+### F-1: Administrator creates a pass
 
-- **Description:** A resident picks a unit, enters an alias, chooses a pass type (`one-time` or `date-range`) and dates. The app validates the input, creates the pass, and signs it. Built.
-- **Rationale:** Without a pass there is nothing to verify at the gate (R-1, R-2 in `.athanor/context/engineering/prd.md`).
+- **Description:** The administrator picks a building (one of four: Main Tower, East Wing, West Wing, Annex), types the visitor's name, and sets valid from and valid until. The app validates the input, creates the pass and signs it. Built.
+- **Rationale:** Without a pass there is nothing for the guard to check (R-1, R-2 in `.athanor/context/engineering/prd.md`; `.athanor/docs/discovery/kickoff-brief.md`).
+- **Serves:** G-1, G-5
+- **Est. story count:** 1 (US-1)
+
+### F-2: QR code
+
+- **Description:** The signed token is shown as a QR code on the screen, with a text alternative. There is no link text, no copy button and no typed code. A short note says: "In a full version, this QR code could be sent to the visitor by email." Built.
+- **Rationale:** Both the administrator and the guard want the pass to be a QR code, and nobody asked for typed codes or links (`.athanor/docs/discovery/stakeholder-notes.md`; D-3).
 - **Serves:** G-1
-- **Est. story count:** 2 (US-1, US-2)
+- **Est. story count:** 1 (US-2)
 
-### F-2: QR code and shareable link
+### F-3: Guard verifies a pass
 
-- **Description:** The signed token is shown as a QR code. A **Copy verify link** button copies the verify URL, which is built from the current origin. The URL text is not shown. Built.
-- **Rationale:** The visitor needs something to show or receive; the resident wants a link to send by text message (R-3; `.athanor/docs/discovery/stakeholder-notes.md`).
-- **Serves:** G-1
-- **Est. story count:** 2 (US-3, US-4)
-
-### F-3: Guard verifies a pass from the QR link
-
-- **Description:** The verify route opens from the QR link and applies the verification policy: signature, blocklist, validity window, one-time ledger, then grant or deny with a reason, and a log entry for every attempt. The exact check order, the fixed reason texts, one-time pass handling and the screens are settled in `.athanor/context/engineering/prd.md` (R-6, D-1 to D-12). Not built. The verify route today only shows "Verification is not implemented yet" (R-5).
-- **Rationale:** It is the next feature in the PRD ("Next. To be specced.") and the one that delivers the guard's decision and the blocklist rule.
+- **Description:** Scanning the QR code opens the verify link. The page applies the verification policy: readable token, signature, blocklist, valid from, valid until, then grant or deny with a reason, and a log entry for every attempt. The guard sees a full-screen green ACCESS GRANTED or red ACCESS DENIED with the reason. The check order, the fixed reason texts and the screens are settled in `.athanor/context/engineering/prd.md` (R-6, D-1, D-5, D-7, D-8). Not built. The verify page today only shows "Verification is not implemented yet" (R-5).
+- **Rationale:** It delivers the guard's decision and the rule that banned people never enter. This is the feature the workshop attendees spec and build.
 - **Serves:** G-2, G-3, G-4
-- **Est. story count:** 3, to be specced as GitHub issues. Planned split: (1) `verifyPass`, the pure policy with the fixed reason texts (`prd.md` R-6); (2) the verify screen, which reads the clock once, writes the ledger on a grant of a one-time pass, and shows the result (D-7, D-9); (3) the log entry for every attempt, with the fields in D-9.
+- **Est. story count:** 3, to be specced as GitHub issues. Planned split: (1) `verifyPass`, the pure policy with the fixed reason texts (`prd.md` R-6, D-5); (2) the verify screen, which reads the clock once and shows the result (D-7); (3) the log entry for every attempt (D-7).
 
 ### F-4: Entry log view and export
 
-- **Description:** The `#/log` screen lists stored entries and exports them as CSV. Built. Nothing writes entries yet, because verification (F-3) is not built.
-- **Rationale:** The administrator wants an entries report that opens in a spreadsheet (R-4).
+- **Description:** The `#/log` page lists stored entries and exports them as CSV. Built. Nothing writes entries until F-3 is built.
+- **Rationale:** The administrator wants a report of entries that opens in a spreadsheet at month end, and the facilities team wants to see who came in and when (`.athanor/docs/discovery/stakeholder-notes.md`; R-4).
 - **Serves:** G-4
-- **Est. story count:** 2 (US-5, US-6)
+- **Est. story count:** 2 (US-3, US-4)
 
 ### F-5: Blocklist data
 
-- **Description:** A fake blocklist in `src/data/blocklist.ts` and the `isBlocked` function. Built. The blocklist is not yet used by any screen.
-- **Rationale:** The administrator keeps the list of banned people, and the blocklist must override every pass (see the verification policy in the PRD).
+- **Description:** A fake list of visitor names in `src/data/blocklist.ts` and the `isBlocked(name)` function. Built. No screen uses the blocklist until F-3 is built.
+- **Rationale:** A banned person must never get in, even with a valid pass (`.athanor/docs/discovery/visitor-policy-excerpt.md`, 4.5; `.athanor/docs/discovery/kickoff-brief.md`).
 - **Serves:** G-3
-- **Est. story count:** 2 (US-7, US-8)
+- **Est. story count:** 2 (US-5, US-6)
 
 ## Won't Have (for now)
 
-### F-6: Recurring passes for domestic staff
+### Sending the QR code to the visitor
 
-- **Reason for exclusion:** Domestic staff come every week. The community bylaws say only that they follow rules approved by the board, and no rules have been given (`.athanor/docs/discovery/bylaws-excerpt.md`). It is not planned and needs rules from the board before it can come back in. See NG-2.
+- **Reason for exclusion:** The administrator said a full version could email the QR code, "for a later version" (`.athanor/docs/discovery/stakeholder-notes.md`). See NG-2.
+
+### Revoking a pass
+
+- **Reason for exclusion:** There is no revoke feature. A pass stops working when it expires. To stop a visitor sooner, the administrator adds the visitor's name to the blocklist (D-2).
+
+### Sign-in and user accounts
+
+- **Reason for exclusion:** There are only two users and the first version has no accounts (`.athanor/docs/discovery/constraints.md`). See NG-1.
 
 ## Dependencies / Notes
 
+- F-2 depends on F-1 (a pass must exist to show a QR code).
 - F-3 depends on F-1 (signed pass), F-5 (blocklist) and F-4 (the log it writes to).
 - F-4 shows no entries until F-3 writes them.
 - F-5 is not used by any screen until F-3 is built.
-- Bucket placement and Est. story count were set when the document was converted to the Athanor format: all in-scope features are listed as Must Have because the sources give no ranking among them.
+- Bucket placement and Est. story count: all in-scope features are listed as Must Have because the sources give no ranking among them.

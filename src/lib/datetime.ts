@@ -1,4 +1,4 @@
-// Converts a `datetime-local` input value (local time) to a UTC ISO 8601 string.
+// Converts between a `datetime-local` input value (local time) and a UTC ISO 8601 string.
 
 /** Returns null when the value is empty or not a valid date. */
 export function localInputToUtcIso(value: string): string | null {
@@ -7,4 +7,10 @@ export function localInputToUtcIso(value: string): string | null {
   }
   const date = new Date(value);
   return Number.isNaN(date.getTime()) ? null : date.toISOString();
+}
+
+/** Formats a Date as a `datetime-local` input value in local time (minutes, no seconds). */
+export function utcToLocalInput(date: Date): string {
+  const pad = (value: number): string => String(value).padStart(2, '0');
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
 }

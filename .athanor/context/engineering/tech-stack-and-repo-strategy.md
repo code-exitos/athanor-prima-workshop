@@ -6,12 +6,12 @@ Status: Approved
 
 ## Overview
 
-A single repo with one app. TypeScript in `strict` mode, built and served in development by Vite, tested with Vitest, run with Node 20 or later and npm. The UI is plain TypeScript with small render helpers and no framework. The one runtime dependency is `qrcode`; signing uses the browser's Web Crypto API. This supports increment 1 (`prd.md`): a static app with no backend, as the board asked (`.athanor/docs/discovery/constraints.md`).
+A single repo with one app. TypeScript in `strict` mode, built and served in development by Vite, tested with Vitest, run with Node 20 or later and npm. The UI is plain TypeScript with small render helpers and no framework. The one runtime dependency is `qrcode`; signing uses the browser's Web Crypto API. This supports increment 1 (`prd.md`): a static app with no backend, as the constraints ask (`.athanor/docs/discovery/constraints.md`).
 
 ## Architecture Pattern
 
 - **Chosen pattern:** Static single-page app that issues signed token passes. Pure domain rules, with time as a parameter.
-- **Options rejected:** A backend: the board does not want to run, secure or pay for a server. A crypto library: the Web Crypto API is enough (ADR 0001).
+- **Options rejected:** A backend: IT does not want to run, secure or pay for a server. A crypto library: the Web Crypto API is enough (ADR 0001).
 - **What in the PRD/discovery justifies this choice:** No server at launch, static hosting, small budget, and a guard phone that must decide from the pass alone (`.athanor/docs/discovery/constraints.md`, `prd.md` R-8).
 - **ADR with the full comparison:** `.athanor/docs/adr/0001-signed-token-pass.md` and `.athanor/docs/adr/0002-time-as-parameter.md`. These two records state the decisions, not a full option comparison.
 
@@ -22,14 +22,14 @@ A single repo with one app. TypeScript in `strict` mode, built and served in dev
 | Layer | Choice | Rationale |
 | --- | --- | --- |
 | Framework/library | Plain TypeScript with small render helpers. No framework. | Not stated in discovery. |
-| State management | None. Ledger and entry log sit in `localStorage` behind a key-value interface. | Not stated in discovery. |
+| State management | None. The entry log sits in `localStorage` behind a key-value interface. | Not stated in discovery. |
 | Styling | Plain CSS (`src/ui/styles.css`) | Not stated in discovery. |
 
 ### Backend
 
 | Layer | Choice | Rationale |
 | --- | --- | --- |
-| Language/runtime | None. There is no backend. | The board wants no server (`constraints.md`). |
+| Language/runtime | None. There is no backend. | IT wants no server (`constraints.md`). |
 | Framework | None | Same |
 | Data access | `localStorage` through `KeyValueStore` (`src/services/storage.ts`) | No database is allowed at launch. |
 
@@ -45,7 +45,7 @@ A single repo with one app. TypeScript in `strict` mode, built and served in dev
 | Layer | Choice | Rationale |
 | --- | --- | --- |
 | Unit/integration | Vitest (`vitest run`, never watch) | Not stated in discovery. |
-| View tests (screens) | Vitest with `jsdom`, chosen per file with the first line `// @vitest-environment jsdom`. Other tests keep the `node` environment. | Screens must be tested without a real browser, and every acceptance criterion needs a test. `jsdom` is a `devDependency` (version 26, works on Node 20 and later), so nothing ships to users. It is the only extra test dependency. Decided by the workshop facilitator, 2026-10-14. |
+| View tests (screens) | Vitest with `jsdom`, chosen per file with the first line `// @vitest-environment jsdom`. Other tests keep the `node` environment. | Screens must be tested without a real browser, and every acceptance criterion needs a test. `jsdom` is a `devDependency` (`^26`, works on Node 20 and later), so nothing ships to users. It is the only extra test dependency (`prd.md`, D-9). Decided by the workshop facilitator, 2026-10-14. |
 | E2E | None | Not stated in discovery. |
 | Test file locations | see § Repository Structure → Test locations | |
 
@@ -58,9 +58,9 @@ A single repo with one app. TypeScript in `strict` mode, built and served in dev
 ## Repository Structure
 
 ```
-src/domain/    pure rules: pass, blocklist, ledger types (no I/O, no clock)
-src/services/  signing, storage, ledger, entry log
-src/data/      demo keys, units, blocklist (fake data)
+src/domain/    pure rules: pass, blocklist (no I/O, no clock)
+src/services/  signing, storage, entry log
+src/data/      demo keys, buildings, blocklist (fake data)
 src/lib/       small helpers: base64url, urls, datetime
 src/ui/        router, views, DOM helpers
 ```
@@ -125,7 +125,7 @@ src/ui/        router, views, DOM helpers
 ### Security
 
 - **Secrets handling:** No secrets in the repo.
-- **Input validation:** The resident form is validated in `createPass` (`src/domain/pass.ts`). Every user string reaches the DOM through `textContent`.
+- **Input validation:** The administrator form is validated in `createPass` (`src/domain/pass.ts`). Every user string reaches the DOM through `textContent`.
 - **Auth enforcement points:** None. There are no accounts. Trust comes from the signature check.
 
 ### Testing Standards

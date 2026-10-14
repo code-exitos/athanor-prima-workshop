@@ -1,33 +1,35 @@
-// Pass types and pass creation. Pure rules: no clock, no storage.
+// Pass creation. Pure rules: no clock, no storage.
 
-export type PassType = 'one-time' | 'date-range';
+/** DEMO DATA ONLY: the four buildings of the fictional Contoso HQ campus. */
+export const BUILDINGS = ['Main Tower', 'East Wing', 'West Wing', 'Annex'] as const;
+export type Building = (typeof BUILDINGS)[number];
 
 export interface Pass {
   readonly v: 1;
   readonly id: string;
-  readonly unit: string;
-  readonly type: PassType;
+  readonly building: Building;
   readonly validFrom: string;
   readonly validUntil: string;
-  readonly visitorAlias: string;
+  readonly visitorName: string;
 }
 
 export interface PassInput {
-  readonly unit: string;
-  readonly type: PassType;
+  readonly building: string;
   readonly validFrom: string;
   readonly validUntil: string;
-  readonly visitorAlias: string;
+  readonly visitorName: string;
 }
 
 export type CreatePassResult =
   | { readonly ok: true; readonly pass: Pass }
   | { readonly ok: false; readonly errors: readonly string[] };
 
-export const ALIAS_MIN_LENGTH = 2;
-export const ALIAS_MAX_LENGTH = 24;
+export const NAME_MIN_LENGTH = 2;
+export const NAME_MAX_LENGTH = 40;
 
-const PASS_TYPES: readonly PassType[] = ['one-time', 'date-range'];
+function isBuilding(value: string): value is Building {
+  return (BUILDINGS as readonly string[]).includes(value);
+}
 
 function parseTime(iso: string): number {
   return Date.parse(iso);
@@ -35,16 +37,13 @@ function parseTime(iso: string): number {
 
 function validateInput(input: PassInput, now: Date): string[] {
   const errors: string[] = [];
-  const alias = input.visitorAlias.trim();
+  const name = input.visitorName.trim();
 
-  if (input.unit.trim() === '') {
-    errors.push('Choose a unit.');
+  if (!isBuilding(input.building)) {
+    errors.push('Choose a building.');
   }
-  if (!PASS_TYPES.includes(input.type)) {
-    errors.push('Choose a pass type.');
-  }
-  if (alias.length < ALIAS_MIN_LENGTH || alias.length > ALIAS_MAX_LENGTH) {
-    errors.push(`Alias must be ${ALIAS_MIN_LENGTH} to ${ALIAS_MAX_LENGTH} characters.`);
+  if (name.length < NAME_MIN_LENGTH || name.length > NAME_MAX_LENGTH) {
+    errors.push(`Name must be ${NAME_MIN_LENGTH} to ${NAME_MAX_LENGTH} characters.`);
   }
 
   const from = parseTime(input.validFrom);
@@ -62,7 +61,7 @@ function validateInput(input: PassInput, now: Date): string[] {
 /** Validates the input and builds a pass. `now` is passed in so the rule stays testable. */
 export function createPass(input: PassInput, now: Date): CreatePassResult {
   const errors = validateInput(input, now);
-  if (errors.length > 0) {
+  if (errors.length > 0 || !isBuilding(input.building)) {
     return { ok: false, errors };
   }
   return {
@@ -70,11 +69,10 @@ export function createPass(input: PassInput, now: Date): CreatePassResult {
     pass: {
       v: 1,
       id: crypto.randomUUID(),
-      unit: input.unit.trim(),
-      type: input.type,
+      building: input.building,
       validFrom: new Date(input.validFrom).toISOString(),
       validUntil: new Date(input.validUntil).toISOString(),
-      visitorAlias: input.visitorAlias.trim(),
+      visitorName: input.visitorName.trim(),
     },
   };
 }

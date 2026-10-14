@@ -20,11 +20,10 @@ function toPayloadJson(pass: Pass): string {
   return JSON.stringify({
     v: pass.v,
     id: pass.id,
-    unit: pass.unit,
-    type: pass.type,
+    building: pass.building,
     validFrom: pass.validFrom,
     validUntil: pass.validUntil,
-    visitorAlias: pass.visitorAlias,
+    visitorName: pass.visitorName,
   });
 }
 

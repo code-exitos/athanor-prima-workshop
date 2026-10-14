@@ -4,112 +4,80 @@ Status: Approved
 
 # User Personas
 
-Three personas, built only from `.athanor/docs/discovery/`. First names are the ones used in the stakeholder notes; all people are fictional.
+Two personas, built only from `.athanor/docs/discovery/`. First names are the ones used in `.athanor/docs/discovery/stakeholder-notes.md`; all people are fictional. There are only two kinds of user and no sign-in (`.athanor/docs/discovery/constraints.md`).
 
-## P-1: Lucy, the resident
+## P-1: Marissa, the facilities administrator
 
 - **Confidence:** Proto-persona
-- **Short description:** A resident of Tartan Fields who often has relatives and deliveries visiting.
-- **Context of use:** Lives in section 7 with two children. Uses the product from her phone.
+- **Short description:** The facilities administrator at Contoso HQ. She creates visitor passes, keeps the list of banned people and handles complaints.
+- **Context of use:** Works in the facilities office on weekdays, on a laptop with a modern browser.
 
 ### Goals
 
-- Create a pass in under a minute from her phone.
-- Send it by text message as a link.
-- Create passes for one visit or for a weekend.
+- Create a visitor pass before the visit: choose the building, the dates and the visitor's name.
+- Show a QR code when the pass is created. "It looks modern and security will approve it faster."
+- Get a report of entries that opens in a spreadsheet at month end.
+- Keep a list of banned people that always works.
 
 ### Pain Points
 
-- Calling the gate.
-- Explaining a picture to a guest.
-- Having a relative's full name stored in a system.
+- The paper log cannot be searched. After a security audit the facilities team spent two days reading pages.
+- Answering complaints about visitors without records.
 
 ### Behaviors
 
-- Fills in the pass form, copies the verify link, and shares it.
+- Creates passes, reviews the entry log, exports it as CSV, and keeps the blocklist.
+- For the demo, her QR code on the laptop screen is scanned with a phone. This simulates the guard scanning the visitor's code at the lobby.
 
 ### Constraints
 
-- Does not want guests' full names stored in a system.
+- Cannot see passes that were created but never used. The app does not store passes (`.athanor/context/engineering/prd.md` D-4).
+- Cannot revoke a single pass. To stop a visitor before the pass expires she adds the visitor's name to the blocklist (`.athanor/context/engineering/prd.md` D-2).
+- The QR code is not sent to the visitor. She said a later version could email it (`.athanor/context/engineering/prd.md` D-3).
 
 ### What Success Looks Like
 
-- A pass created in under a minute and sent as a link, with no call to the gate and no full name stored.
+- A pass created in under a minute, a monthly CSV of entries in a spreadsheet, and a blocklist that always works.
 
 ### Related Journeys
 
 - J-1
+- J-3
+- J-4
 
 ---
 
-## P-2: Ed, the guard
+## P-2: Ed, the lobby security guard
 
 - **Confidence:** Proto-persona
-- **Short description:** The night-shift guard at the main gate.
-- **Context of use:** In a booth at the main gate. Uses an older Android phone with a small, sometimes cracked screen.
+- **Short description:** A lobby security guard at Contoso HQ. He decides whether a visitor may enter.
+- **Context of use:** Works shifts at the Main Tower lobby. Uses a company phone: recent iPhones and mid-range Android phones. Some guards have poor eyesight (`.athanor/docs/discovery/constraints.md`).
 
 ### Goals
 
-- Decide in seconds.
-- See a big, obvious green or red answer.
+- Scan the QR code with the phone camera.
+- See a clear answer right after the scan: a big green screen or a big red screen.
+- On the red screen, see the reason, so he can tell the visitor why.
 
 ### Pain Points
 
-- Cameras and scanning that take a minute.
-- Small text at 3 am.
-- Not being sure who is allowed.
+- Small text. "I do not want to read small text."
+- Phoning the employee host to ask if a visitor is expected. The host often does not answer.
 
 ### Behaviors
 
-- Opens the pass the visitor shows and reads the result.
-- Prefers typing a short code to scanning. This version supports the QR code and the link only (`.athanor/context/engineering/prd.md`, D-4).
+- Scans the QR code on the visitor's pass and reads the result.
+- Does not create passes and does not edit the banned list.
 
 ### Constraints
 
-- Older Android phone with a small, sometimes cracked screen.
-- Works nights, in a booth.
+- Company phone, no app from a store. A web page is acceptable.
+- Sees only the result. The verify page has no navigation (`.athanor/context/engineering/prd.md` D-7).
 
 ### What Success Looks Like
 
-- A big green or red answer in seconds, without small text or a slow scan.
+- A big green or red answer in seconds, with the reason when access is denied, and no small text.
 
 ### Related Journeys
 
 - J-2
-
----
-
-## P-3: Marissa, the administrator
-
-- **Confidence:** Proto-persona
-- **Short description:** The board-appointed administrator who handles complaints and keeps the list of banned people.
-- **Context of use:** Works in the office on weekdays.
-
-### Goals
-
-- A modern look the board will approve.
-- A monthly entries report that opens in a spreadsheet.
-- A blocklist that always works.
-
-### Pain Points
-
-- Searching the paper notebook.
-- Answering for incidents without records.
-
-### Behaviors
-
-- Reviews the entry log, exports it as CSV, and maintains the blocklist data.
-
-### Constraints
-
-- Cannot see passes that were created but never used. The app does not store passes (`.athanor/context/engineering/prd.md`, D-5).
-- Cannot revoke a single pass. She stops a visitor by adding the alias to the blocklist (D-2).
-
-### What Success Looks Like
-
-- A monthly CSV of entries in a spreadsheet and a blocklist that always works, in a look the board approves.
-
-### Related Journeys
-
-- J-3
-- J-4

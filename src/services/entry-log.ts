@@ -9,11 +9,11 @@ export interface EntryRecord {
   readonly result: 'granted' | 'denied';
   readonly reason: string;
   readonly passId?: string;
-  readonly unit?: string;
-  readonly visitorAlias?: string;
+  readonly building?: string;
+  readonly visitorName?: string;
 }
 
-const CSV_COLUMNS = ['at', 'result', 'reason', 'passId', 'unit', 'visitorAlias'] as const;
+const CSV_COLUMNS = ['at', 'result', 'reason', 'passId', 'building', 'visitorName'] as const;
 
 export function listEntries(store: KeyValueStore): EntryRecord[] {
   const raw = store.getItem(ENTRIES_KEY);

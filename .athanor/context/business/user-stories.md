@@ -6,7 +6,7 @@ Status: Approved
 
 Stories exist for built features F-1, F-2, F-4 and F-5 only. F-3 has none yet.
 
-## F-1: Resident creates pass
+## F-1: Administrator creates a pass
 
 ### US-1: Create a pass
 
@@ -17,27 +17,29 @@ Stories exist for built features F-1, F-2, F-4 and F-5 only. F-3 has none yet.
 
 #### Why This Priority
 
-Without a created pass nothing else in the flow works. It ships first within F-1.
+Without a created pass nothing else in the flow works. It ships first.
 
 #### Story Statement
 
-- **As a** P-1 Lucy (resident),
-- **I want** to create a pass for my visitor,
-- **so that** the visitor can enter.
+- **As a** P-1 Marissa (administrator),
+- **I want** to create a visitor pass for a building, a visitor name and dates,
+- **so that** the visitor can enter without a call to the lobby.
 
 #### Independent Test
 
-Fill in the resident form and submit. A signed pass is created without any other story being done.
+Fill in the form on PG-1 and press **Generate QR code**. A signed pass is created without any other story being done.
 
 #### Technical Context
 
-Alias is 2 to 24 characters after trimming and `validUntil` must not be before `validFrom` (R-1). The pass is signed as a token (R-2). Entities: E-1 Pass, E-2 Token. Fields are in `.athanor/context/engineering/data-model.md`.
+Building is one of four. The visitor name is 2 to 40 characters after trimming. `validUntil` must not be before `validFrom` and must not be in the past (R-1). The pass is signed as a token (R-2). Entities: E-1 Pass, E-2 Token, in `.athanor/context/engineering/data-model.md`. The end date is included (D-1) and `validUntil` equal to `validFrom` is allowed (D-8), in `.athanor/context/engineering/prd.md`.
 
 #### Acceptance Criteria
 
-- **AC-1:** Given I am on the resident form, when I choose a unit, type an alias, pick a type and valid dates and submit, then a signed pass is created.
-- **AC-2:** Given the alias is shorter than 2 or longer than 24 characters after trimming, when I submit, then I see an error next to the alias field and no pass is created.
-- **AC-3:** Given the end date is before the start date, when I submit, then I see an error and no pass is created.
+- **AC-1:** Given I am on the New visitor pass page, when I choose a building, type a visitor name and pick valid dates and submit, then a signed pass is created.
+- **AC-2:** Given the visitor name is shorter than 2 or longer than 40 characters after trimming, when I submit, then I see an error next to the name field and no pass is created.
+- **AC-3:** Given the end is before the start, when I submit, then I see an error and no pass is created.
+- **AC-4:** Given the end is in the past, when I submit, then I see an error and no pass is created.
+- **AC-5:** Given no building is chosen, when I submit, then I see an error and no pass is created.
 
 #### Edge Cases
 
@@ -55,74 +57,20 @@ Alias is 2 to 24 characters after trimming and `validUntil` must not be before `
 
 #### Out of Scope
 
-- Not stated.
+- Showing the QR code (US-2).
+- Storing passes. The app does not store passes (D-4).
 
 #### Test Plan
 
-- **Unit:** AC-1, AC-2, AC-3
+- **Unit:** AC-1, AC-2, AC-3, AC-4, AC-5
 - **Integration:** Not stated.
 - **E2E (if applicable):** Not stated.
 
 ---
 
-### US-2: Choose the pass type
+## F-2: QR code
 
-- **Priority:** P2
-- **Serves:** G-1 (via F-1)
-- **Personas:** P-1
-- **Journeys:** J-1
-
-#### Why This Priority
-
-The form works with one type, but residents need both a delivery and a weekend visit.
-
-#### Story Statement
-
-- **As a** P-1 Lucy (resident),
-- **I want** one-time and date-range passes,
-- **so that** I can fit a delivery or a weekend visit.
-
-#### Independent Test
-
-Open the pass type field on the form and check the choices.
-
-#### Technical Context
-
-Pass `type` is `"one-time"` or `"date-range"` (E-1 Pass, `.athanor/context/engineering/data-model.md`).
-
-#### Acceptance Criteria
-
-- **AC-1:** Given the form, when I open the pass type field, then I can choose `one-time` or `date-range`.
-
-#### Edge Cases
-
-- **Not stated:** The sources list no edge cases.
-
-#### Design/UX References
-
-- **Journey:** J-1
-- **IA page:** PG-1
-- **UI Design Prompt:** Not drafted yet.
-
-#### Dependencies
-
-- No dependencies
-
-#### Out of Scope
-
-- Recurring passes for domestic staff (F-6).
-
-#### Test Plan
-
-- **Unit:** AC-1
-- **Integration:** Not stated.
-- **E2E (if applicable):** Not stated.
-
----
-
-## F-2: QR code and shareable link
-
-### US-3: See a QR code
+### US-2: See the QR code
 
 - **Priority:** P1
 - **Serves:** G-1 (via F-2)
@@ -131,25 +79,28 @@ Pass `type` is `"one-time"` or `"date-range"` (E-1 Pass, `.athanor/context/engin
 
 #### Why This Priority
 
-The QR code is what the visitor shows at the gate. The link (US-4) is the alternative way to share.
+The QR code is what gets scanned at the lobby. Without it the pass cannot be used.
 
 #### Story Statement
 
-- **As a** P-1 Lucy (resident),
-- **I want** to see a QR code for my pass,
-- **so that** my visitor can show it at the gate.
+- **As a** P-1 Marissa (administrator),
+- **I want** to see a QR code for the pass I created,
+- **so that** it can be scanned at the lobby.
 
 #### Independent Test
 
-Create a pass and check that the result shows a QR code with a text alternative.
+Create a pass and check that the result shows a QR code with a text alternative and the note about email, and no link text and no copy button.
 
 #### Technical Context
 
-The QR code encodes the verify URL with the signed token (E-2 Token; `.athanor/context/design/information-architecture.md`, PG-1).
+The QR code encodes the verify URL, `<origin><path>?p=<token>`, built from `window.location.origin` (R-3; E-2 Token). There is no link text, no copy button and no typed code (D-3). Page: PG-1, in `.athanor/context/design/information-architecture.md`.
 
 #### Acceptance Criteria
 
 - **AC-1:** Given a pass was created, when the result appears, then I see a QR code with a text alternative.
+- **AC-2:** Given a pass was created, when the result appears, then I see the note "In a full version, this QR code could be sent to the visitor by email."
+- **AC-3:** Given a pass was created, when the result appears, then there is no link text and no copy button.
+- **AC-4:** Given a pass was created, when the QR code is read, then it encodes the verify URL with the signed token.
 
 #### Edge Cases
 
@@ -167,73 +118,17 @@ The QR code encodes the verify URL with the signed token (E-2 Token; `.athanor/c
 
 #### Out of Scope
 
-- Not stated.
+- Sending the QR code to the visitor (NG-2).
 
 #### Test Plan
 
-- **Unit:** Not stated.
-- **Integration:** AC-1
+- **Unit:** AC-4
+- **Integration:** AC-1, AC-2, AC-3
 - **E2E (if applicable):** Not stated.
 
 ---
 
-### US-4: Copy a link
-
-- **Priority:** P1
-- **Serves:** G-1 (via F-2)
-- **Personas:** P-1
-- **Journeys:** J-1
-
-#### Why This Priority
-
-Lucy wants to send a link by text message instead of a picture.
-
-#### Story Statement
-
-- **As a** P-1 Lucy (resident),
-- **I want** to copy a verify link,
-- **so that** I can send it by text message.
-
-#### Independent Test
-
-Create a pass, press **Copy verify link**, and check the clipboard and the confirmation.
-
-#### Technical Context
-
-The verify URL is built from `window.location.origin`, never a fixed host (R-3). Format: `<origin><path>?p=<token>`. The token is in the query string because sign-in redirects (for example Codespaces port forwarding) drop the `#fragment` but keep the query.
-
-#### Acceptance Criteria
-
-- **AC-1:** Given a pass was created, when I press **Copy verify link**, then the link is on my clipboard and I see a confirmation.
-- **AC-2:** Given the app is served from any origin, when the link is built, then it starts with the current origin, not a fixed host.
-
-#### Edge Cases
-
-- **Not stated:** The sources list no further edge cases.
-
-#### Design/UX References
-
-- **Journey:** J-1
-- **IA page:** PG-1
-- **UI Design Prompt:** Not drafted yet.
-
-#### Dependencies
-
-- US-1: a pass must exist to build a link.
-
-#### Out of Scope
-
-- Not stated.
-
-#### Test Plan
-
-- **Unit:** AC-2
-- **Integration:** AC-1
-- **E2E (if applicable):** Not stated.
-
----
-
-## F-3: Guard verifies a pass from the QR link
+## F-3: Guard verifies a pass
 
 No stories yet. To be specced as GitHub issues, in the three-story split planned in `.athanor/context/business/features.md` (F-3).
 
@@ -241,22 +136,22 @@ No stories yet. To be specced as GitHub issues, in the three-story split planned
 
 ## F-4: Entry log view and export
 
-### US-5: See the log
+### US-3: See the log
 
 - **Priority:** P1
 - **Serves:** G-4 (via F-4)
-- **Personas:** P-3
+- **Personas:** P-1
 - **Journeys:** J-3
 
 #### Why This Priority
 
-The administrator must see entries before exporting them (US-6).
+The administrator must see entries before exporting them (US-4).
 
 #### Story Statement
 
-- **As a** P-3 Marissa (administrator),
-- **I want** to see entries,
-- **so that** I know who came in.
+- **As a** P-1 Marissa (administrator),
+- **I want** to see the entries,
+- **so that** I know who came in and who was refused.
 
 #### Independent Test
 
@@ -264,7 +159,7 @@ Open `#/log` with no entries, then with stored entries, and check what is shown.
 
 #### Technical Context
 
-Entries are stored on one device only (E-5 Entry log, `.athanor/context/engineering/data-model.md`). Empty state text is "No entries yet" (R-4).
+Entries are stored on one device only (E-4 Entry log, `.athanor/context/engineering/data-model.md`). Empty state text is "No entries yet" (R-4).
 
 #### Acceptance Criteria
 
@@ -297,20 +192,20 @@ Entries are stored on one device only (E-5 Entry log, `.athanor/context/engineer
 
 ---
 
-### US-6: Export the log
+### US-4: Export the log
 
 - **Priority:** P2
 - **Serves:** G-4 (via F-4)
-- **Personas:** P-3
+- **Personas:** P-1
 - **Journeys:** J-3
 
 #### Why This Priority
 
-Marissa wants a monthly report in a spreadsheet, but needs the log view (US-5) first.
+Marissa wants a report in a spreadsheet at month end, but needs the log view (US-3) first.
 
 #### Story Statement
 
-- **As a** P-3 Marissa (administrator),
+- **As a** P-1 Marissa (administrator),
 - **I want** to export the log as CSV,
 - **so that** I can open it in a spreadsheet.
 
@@ -320,7 +215,7 @@ Open `#/log` with and without entries and check the **Export CSV** button.
 
 #### Technical Context
 
-**Export CSV** is disabled when the log is empty (R-4). Entity: E-5 Entry log.
+**Export CSV** is disabled when the log is empty (R-4). Entity: E-4 Entry log. CSV columns: `at,result,reason,passId,building,visitorName`.
 
 #### Acceptance Criteria
 
@@ -355,22 +250,22 @@ Open `#/log` with and without entries and check the **Export CSV** button.
 
 ## F-5: Blocklist data
 
-### US-7: Keep a blocklist
+### US-5: Keep a blocklist
 
 - **Priority:** P1
 - **Serves:** G-3 (via F-5)
-- **Personas:** P-3
+- **Personas:** P-1
 - **Journeys:** J-4
 
 #### Why This Priority
 
-The blocklist must exist before any check can use it (US-8).
+The blocklist must exist before any check can use it (US-6).
 
 #### Story Statement
 
-- **As a** P-3 Marissa (administrator),
-- **I want** a list of blocked aliases in the code,
-- **so that** the board can ban people.
+- **As a** P-1 Marissa (administrator),
+- **I want** a list of blocked visitor names in the code,
+- **so that** banned people can be stopped.
 
 #### Independent Test
 
@@ -378,11 +273,11 @@ Read `src/data/blocklist.ts` and check its contents.
 
 #### Technical Context
 
-The list lives in `src/data/blocklist.ts` and changes with a deploy (E-3 Blocklist; assumption in `.athanor/context/engineering/prd.md`).
+The list lives in `src/data/blocklist.ts` and changes with a deploy (E-3 Blocklist, `.athanor/context/engineering/data-model.md`). Names are fake only.
 
 #### Acceptance Criteria
 
-- **AC-1:** Given the blocklist file, when I read it, then it contains fake demo aliases only.
+- **AC-1:** Given the blocklist file, when I read it, then it contains fake demo visitor names only.
 
 #### Edge Cases
 
@@ -410,35 +305,35 @@ The list lives in `src/data/blocklist.ts` and changes with a deploy (E-3 Blockli
 
 ---
 
-### US-8: Check an alias
+### US-6: Check a name
 
 - **Priority:** P1
 - **Serves:** G-3 (via F-5)
-- **Personas:** P-3
+- **Personas:** P-1
 - **Journeys:** J-2, J-4
 
 #### Why This Priority
 
-Screens need one function to ask whether an alias is blocked; F-3 will rely on it.
+Screens need one function to ask whether a visitor name is blocked; F-3 will rely on it.
 
 #### Story Statement
 
-- **As the system** (acting for P-3 Marissa's blocklist),
+- **As the system** (acting for P-1 Marissa's blocklist),
 - **I want** an `isBlocked` function,
-- **so that** screens can ask if an alias is blocked.
+- **so that** screens can ask if a visitor name is blocked.
 
 #### Independent Test
 
-Call `isBlocked` with an alias that is in the list and one that is not.
+Call `isBlocked` with a name that is in the list and one that is not.
 
 #### Technical Context
 
-Blocklist matching is by visitor alias, because aliases are all that is stored (assumption in `.athanor/context/engineering/prd.md`). Entity: E-3 Blocklist. Pure function; time is not involved.
+`isBlocked(name)` matches the visitor name exactly and is case-sensitive (D-6 in `.athanor/context/engineering/prd.md`; a known demo limit). Entity: E-3 Blocklist. Pure function; time is not involved.
 
 #### Acceptance Criteria
 
-- **AC-1:** Given an alias that is in the list, when I call `isBlocked`, then it returns true.
-- **AC-2:** Given an alias that is not in the list, when I call `isBlocked`, then it returns false.
+- **AC-1:** Given a name that is in the list, when I call `isBlocked`, then it returns true.
+- **AC-2:** Given a name that is not in the list, when I call `isBlocked`, then it returns false.
 
 #### Edge Cases
 
@@ -452,7 +347,7 @@ Blocklist matching is by visitor alias, because aliases are all that is stored (
 
 #### Dependencies
 
-- US-7: the list must exist.
+- US-5: the list must exist.
 
 #### Out of Scope
 

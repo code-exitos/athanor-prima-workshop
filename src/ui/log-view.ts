@@ -4,7 +4,7 @@ import { listEntries, toCsv } from '../services/entry-log';
 import { createLocalStorageStore } from '../services/storage';
 import { el } from './dom';
 
-const COLUMNS = ['Time', 'Result', 'Reason', 'Unit', 'Alias'];
+const COLUMNS = ['Time', 'Result', 'Reason', 'Building', 'Visitor'];
 
 function downloadCsv(csv: string): void {
   const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
@@ -37,8 +37,8 @@ export function renderLogView(root: HTMLElement): void {
                 el('td', {}, entry.at),
                 el('td', { class: entry.result === 'granted' ? 'granted' : 'denied' }, entry.result),
                 el('td', {}, entry.reason),
-                el('td', {}, entry.unit ?? ''),
-                el('td', {}, entry.visitorAlias ?? ''),
+                el('td', {}, entry.building ?? ''),
+                el('td', {}, entry.visitorName ?? ''),
               ),
             ),
           ),

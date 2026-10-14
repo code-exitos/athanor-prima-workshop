@@ -2,9 +2,9 @@ import { describe, expect, it } from 'vitest';
 import { parseRoute } from './router';
 
 describe('parseRoute', () => {
-  it('maps the resident route', () => {
-    expect(parseRoute('')).toEqual({ name: 'resident' });
-    expect(parseRoute('#/')).toEqual({ name: 'resident' });
+  it('maps the new pass route', () => {
+    expect(parseRoute('')).toEqual({ name: 'pass' });
+    expect(parseRoute('#/')).toEqual({ name: 'pass' });
   });
 
   it('maps the log route', () => {

@@ -1,5 +1,6 @@
-// Blocklist rule: a blocked alias may not enter, even with a valid pass.
+// Blocklist rule: a blocked visitor name may not enter, even with a valid pass.
+// The match is exact and case-sensitive.
 
-export function isBlocked(alias: string, blocklist: readonly string[]): boolean {
-  return blocklist.includes(alias);
+export function isBlocked(name: string, blocklist: readonly string[]): boolean {
+  return blocklist.includes(name);
 }

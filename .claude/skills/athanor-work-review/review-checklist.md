@@ -6,7 +6,7 @@ Review the whole diff against the base branch. Report each finding as: severity,
 
 1. **Correctness and spec conformance**
    - Each acceptance criterion is met, including boundaries (equal start and end, exactly at `validUntil`, 1 ms either side).
-   - The verification order is exactly: signature, blocklist (overrides everything), validity window, one-time ledger, then grant or deny with a specific reason. Every attempt is logged.
+   - The verification order is exactly: signature, blocklist (overrides everything), validity window, then grant or deny with a specific reason. Every attempt is logged.
    - Reasons are specific, not generic.
 2. **Security and privacy**
    - Tampered or malformed tokens are denied, never thrown at the user.

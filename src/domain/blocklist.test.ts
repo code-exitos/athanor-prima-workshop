@@ -8,8 +8,8 @@ describe('isBlocked', () => {
     expect(isBlocked('XX', blocklist)).toBe(true);
   });
 
-  it('returns false for an alias that is not listed', () => {
-    expect(isBlocked('JR', blocklist)).toBe(false);
+  it('returns false for a name that is not listed', () => {
+    expect(isBlocked('Pat Visitor', blocklist)).toBe(false);
   });
 
   it('returns false for an empty blocklist', () => {

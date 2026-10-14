@@ -7,8 +7,8 @@ const granted: EntryRecord = {
   result: 'granted',
   reason: 'Valid pass',
   passId: 'p1',
-  unit: 'Unit 01',
-  visitorAlias: 'JR',
+  building: 'Main Tower',
+  visitorName: 'Pat Visitor',
 };
 const denied: EntryRecord = { at: '2026-06-02T11:00:00.000Z', result: 'denied', reason: 'Invalid signature' };
 
@@ -27,14 +27,14 @@ describe('entry log', () => {
 
 describe('toCsv', () => {
   it('writes a header only for no entries', () => {
-    expect(toCsv([])).toBe('at,result,reason,passId,unit,visitorAlias\n');
+    expect(toCsv([])).toBe('at,result,reason,passId,building,visitorName\n');
   });
 
   it('writes one row per entry and leaves missing fields empty', () => {
     expect(toCsv([granted, denied])).toBe(
       [
-        'at,result,reason,passId,unit,visitorAlias',
-        '2026-06-02T10:00:00.000Z,granted,Valid pass,p1,Unit 01,JR',
+        'at,result,reason,passId,building,visitorName',
+        '2026-06-02T10:00:00.000Z,granted,Valid pass,p1,Main Tower,Pat Visitor',
         '2026-06-02T11:00:00.000Z,denied,Invalid signature,,,',
         '',
       ].join('\n'),
@@ -47,7 +47,7 @@ describe('toCsv', () => {
   });
 
   it('neutralises spreadsheet formulas', () => {
-    const csv = toCsv([{ ...denied, visitorAlias: '=HYPERLINK("x")' }]);
+    const csv = toCsv([{ ...denied, visitorName: '=HYPERLINK("x")' }]);
     expect(csv).toContain(`"'=HYPERLINK(""x"")"`);
   });
 });

@@ -3,7 +3,7 @@
 import './ui/styles.css';
 import { el } from './ui/dom';
 import { renderLogView } from './ui/log-view';
-import { renderResidentView } from './ui/resident-view';
+import { renderPassView } from './ui/pass-view';
 import { parseRoute } from './ui/router';
 import { renderVerifyView } from './ui/verify-view';
 
@@ -19,13 +19,13 @@ function render(): void {
   const nav = el(
     'nav',
     { 'aria-label': 'Main' },
-    el('span', { class: 'brand' }, 'Neighborhood Access'),
-    el('a', route.name === 'resident' ? { href: '#/', 'aria-current': 'page' } : { href: '#/' }, 'New pass'),
+    el('span', { class: 'brand' }, 'Contoso HQ · Visitor access'),
+    el('a', route.name === 'pass' ? { href: '#/', 'aria-current': 'page' } : { href: '#/' }, 'New pass'),
     el('a', route.name === 'log' ? { href: '#/log', 'aria-current': 'page' } : { href: '#/log' }, 'Entry log'),
   );
   switch (route.name) {
-    case 'resident':
-      renderResidentView(content);
+    case 'pass':
+      renderPassView(content);
       break;
     case 'log':
       renderLogView(content);
