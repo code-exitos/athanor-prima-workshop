@@ -18,10 +18,18 @@ Rules for this skill:
 ## Steps
 
 ### 0. Preflight
-Read every file in `docs/discovery/` and every doc under `docs/context/`. List each doc with its `status`. If `docs/context/business/personas.md` exists and is Approved, say so and offer to review or refine it. Never overwrite without consent. If the user asks for another document type, say it is outside the workshop edition.
+Read every file in `docs/discovery/` and every doc under `docs/context/`. List each doc with its `status`. Then find the next document yourself. The business sequence, in order, is:
+
+problem-statement → vision → personas → journeys → features → user-stories (all in `docs/context/business/`)
+
+The **next** document is the first one in that sequence that is missing or not Approved. Do not assume it is personas.
+- If the next document is personas, continue with this skill.
+- If personas is Approved, say so and offer to review or refine it. Never overwrite without consent.
+- If an earlier document (problem statement or vision) is missing or Draft, stop and say which one. Workshop edition cannot draft it.
+- If the user asks for another document type, say it is outside the workshop edition. Name the next document and say it is out of scope here.
 
 ### 1. Orient (teach)
-Say what you are about to make, why, and how it feeds the next step. Show this sequence:
+Say what you are about to make, why, and how it feeds the next step. Show the sequence from step 0, with ✔ on each Approved doc, **bold** on the next one, and no mark on the rest. Example when only the first two are Approved:
 
 problem statement ✔ → vision ✔ → **personas** → journeys → features → user stories
 

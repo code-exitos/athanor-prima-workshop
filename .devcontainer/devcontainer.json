@@ -1,6 +1,6 @@
 {
   "name": "Athanor Prima Workshop",
-  "image": "mcr.microsoft.com/devcontainers/typescript-node:20",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:22",
   "hostRequirements": {
     "cpus": 2
   },
