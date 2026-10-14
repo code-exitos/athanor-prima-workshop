@@ -13,7 +13,7 @@ Rules for this skill:
 - Ask at most 3 questions per round and at most 3 rounds. For each question, say why you ask and give a recommended answer from the sources, so the user can reply "yes".
 - Offer once, at the start of the question rounds: "Say **accept all** and I will take every recommendation as a labeled assumption."
 - Cite a source file for every claim: `(source: <path>)` or `(assumption)`.
-- A skipped question becomes an open question or an assumption (who decided, when).
+- A skipped question becomes a labeled assumption that takes your recommendation (who decided, when). The document has no open questions.
 
 ## Steps
 
@@ -47,7 +47,7 @@ Flag conflicts and gaps in the sources and propose how to handle each:
 - "valid until" with no statement about the end date;
 - the single mention of domestic staff;
 - who may revoke a pass.
-Suggest at least one anti-persona. Do not resolve product decisions here: record them as open questions for the spec step.
+Suggest at least one anti-persona. Resolve each flag with the user now: propose the recommended option (the easy or logical one) with its consequence, and record the result in the persona it affects (Pain Points, Behaviors or Constraints). Do not leave open questions in the document.
 
 ### 5. Draft
 Fill the template. Code personas `P-1`, `P-2`, ... in order. Set **Confidence** to `Proto-persona` (built from discovery notes, not validated). Write `none drafted yet` under Related Journeys. Cite sources inline as `(source: <path>)` or `(assumption)`. Drop the HTML comments from the saved text. Show the full document in chat and ask what to change or whether to approve. Default: at most 2 revision rounds, more if the user wants.
@@ -56,4 +56,4 @@ Fill the template. Code personas `P-1`, `P-2`, ... in order. Set **Confidence** 
 After the user agrees, write `.athanor/context/business/personas.md` with the front matter `Status: Draft` (no other front matter keys: the Athanor format has one). Set `Status: Approved` only after the user says explicitly that they approve. Offer to run `git add` and `git commit` (message: `docs: add personas`). Never push.
 
 ### 7. Wrap up
-Summarize decisions, open questions and assumptions, and what this unlocks next. Say: "To go on, commit this file, run `git switch checkpoint-2`, then ask me: lets spec the issues for feature 3." Note that checkpoint-2 already has its own approved personas, so this step was practice.
+Summarize the decisions and assumptions, and what this unlocks next. Say: "To go on, commit this file, run `git switch checkpoint-2`, then ask me: lets spec the issues for feature 3." Note that checkpoint-2 already has its own approved personas, so this step was practice.
