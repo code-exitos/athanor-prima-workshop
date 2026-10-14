@@ -3,7 +3,7 @@
 WORKSHOP EDITION: a condensed subset of a larger method. For workshop use only.
 
 - Never invent facts. If the sources do not say it, log it as an open question or a labeled assumption (who decided, when).
-- Context docs carry front matter: `title`, `status` (Draft or Approved), `owner`, `last_updated`. Only a human approves a doc.
+- Context docs follow the Athanor templates and carry front matter `Status: Draft | Under Review | Approved`. Items use ID codes (G-#, P-#, J-#, F-#, US-#, AC-#, R-#, E-#). Only a human approves a doc. Issues and commit/PR messages use the template files in `.claude/skills/`.
 - Co-create: explain what you are about to make and why, ask at most 3 questions per turn (each with a recommended answer), propose, show, get approval. Never produce a finished artifact in one shot.
 - Never create issues, labels or milestones, push a branch, or open a PR without explicit approval.
 - Always target the user's own repo with `--repo "$REPO"` (from `origin`). Never write to the facilitator's template repo.

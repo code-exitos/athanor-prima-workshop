@@ -7,7 +7,7 @@ WORKSHOP EDITION: a condensed subset of a larger method. For workshop use only.
 
 # Spec a feature as GitHub issues
 
-Goal: one Feature issue and at most 3 User Story sub-issues, so well written that someone else can build and test them. Templates: [issue-templates.md](issue-templates.md).
+Goal: one Feature issue and at most 3 User Story sub-issues, so well written that someone else can build and test them. Templates, the same ones the full Athanor method uses: [feature-issue.md](feature-issue.md) and [user-story-issue.md](user-story-issue.md). Use their headings exactly, in order. Codes: `F-#`, `US-#`, `AC-#`, `P-#`, `R-#`, `G-#`, `E-#` come from the context docs. The Feature and story codes carry over unchanged from `features.md` and `user-stories.md` when they exist. Where the template cites `prd-<increment>.md`, use `.athanor/context/engineering/prd.md`. Drop the HTML comments from the issue text.
 
 Rules for this skill:
 - Ask at most 3 questions at a time. Each has a reason and a recommended answer. Offer "accept all recommendations" once.
@@ -19,7 +19,7 @@ Rules for this skill:
 ## Steps
 
 ### 0. Preflight
-- Every doc under `docs/context/` must have `status: Approved`. If any is not, name the missing or Draft ones, stop, and suggest `git switch checkpoint-2`.
+- Every doc under `.athanor/context/` must have `Status: Approved` in its front matter. If any is not, name the missing or Draft ones, stop, and suggest `git switch checkpoint-2`.
 - `gh auth status`; resolve `REPO`; apply the owner check above.
 - Issues enabled: `gh repo view "$REPO" --json hasIssuesEnabled -q .hasIssuesEnabled`. If false, tell the user: Settings → General → Features → tick Issues.
 
@@ -27,16 +27,16 @@ Rules for this skill:
 In a few lines: a Feature is the outcome; a User Story sub-issue is one slice a person can build and test; specs come before code because the tests are written from them. "Well specified" means: traceable (cites docs), testable (Given/When/Then), unambiguous, sized, ordered.
 
 ### 2. Locate the feature
-Find it in `docs/context/business/features.md`. "Feature 3" means F-03 in that file, not GitHub issue #3. Read the PRD, personas, journeys, data model, architecture, brand guidelines and `docs/adr/`. Check for duplicates: `gh issue list --repo "$REPO" --state all --search "<keywords>"`. If one exists, offer to refine it instead of creating a new one.
+Find it in `.athanor/context/business/features.md`. "Feature 3" means F-03 in that file, not GitHub issue #3. Read the PRD, personas, journeys, data model, architecture, brand guidelines and `.athanor/docs/adr/`. Check for duplicates: `gh issue list --repo "$REPO" --state all --search "<keywords>"`. If one exists, offer to refine it instead of creating a new one.
 
 ### 3. Decision round
-List the PRD "Open questions and assumptions" that affect this feature (for example: is the end date inclusive; who can revoke; behavior with no signal; typed code versus QR; domestic staff). For each give 2 options, a recommendation, and its consequences. Batches of at most 3. Record each decision with rationale, who decided, and the date.
+List the PRD "Open questions and assumptions" that affect this feature (for example: is the end date inclusive; who can revoke; typed code versus QR; domestic staff). For each give 2 options, a recommendation, and its consequences. Batches of at most 3. Record each decision with rationale, who decided, and the date.
 
 ### 4. Metadata round
 Ask for: start date and target date (defaults: today and today + 7 days), priority (high, medium, low), size (S, M, L), assignee (default `@me`). Explain labels and the milestone in one line each.
 
 ### 5. Draft everything, then show it all
-Write one Feature issue plus at most 3 stories using `issue-templates.md`. Show every draft in full as rendered markdown, plus a table: title, labels, milestone, assignee, start and target dates, parent-child links, dependency order. Ask for edits or approval; iterate. Issues must be concrete, descriptive and testable. For F-03 a plausible split is: (1) token parsing and signature verification; (2) decision policy: blocklist, validity window, one-time ledger; (3) result screen and log entry. Derive the final split from the docs.
+Write one Feature issue plus at most 3 stories using the two template files. Add the workshop `Schedule` block (start, target) above the first heading, because personal accounts have no date fields (see step 6). Every story needs at least 4 acceptance criteria, including a boundary and a negative case. Show every draft in full as rendered markdown, plus a table: title, labels, milestone, assignee, start and target dates, parent-child links, dependency order. Ask for edits or approval; iterate. Issues must be concrete, descriptive and testable. For F-03 a plausible split is: (1) token parsing and signature verification; (2) decision policy: blocklist, validity window, one-time ledger; (3) result screen and log entry. Derive the final split from the docs.
 
 ### 6. Create (only after an explicit yes)
 1. Labels: ensure these exist, creating missing ones with `gh label create --repo "$REPO" <name> --color <hex>`: `feature`, `user-story`, `priority:high`, `priority:medium`, `priority:low`, `size:S`, `size:M`, `size:L`, `area:verification`, `workshop-demo`.
