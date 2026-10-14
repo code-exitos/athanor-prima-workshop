@@ -34,7 +34,7 @@ Status: Approved
 
 - **Purpose:** Show a guard the result of a pass check. Route `?p=<token>`. Audience: guard (P-2). Feature: F-3 (not built yet).
 - **Primary actions:** None. The guard only reads the result.
-- **Data shown:** Until F-3, the page shows the placeholder "Verification is not implemented yet". After F-3, it shows a full-screen result. Granted shows ACCESS GRANTED, the reason, the building and the visitor name. Denied shows ACCESS DENIED and the reason only (`.athanor/context/engineering/prd.md`, R-5, R-6, D-7).
+- **Data shown:** Until F-3, the page shows the placeholder "Verification is not implemented yet". After F-3, it shows a full-screen result. Granted shows ACCESS GRANTED, the reason, the building and the visitor name. Denied shows ACCESS DENIED and the reason only. The page does not check the building (D-10) (`.athanor/context/engineering/prd.md`, R-5, R-6, D-7).
 
 ## Navigation Rules
 

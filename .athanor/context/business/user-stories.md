@@ -49,7 +49,7 @@ Building is one of four. The visitor name is 2 to 40 characters after trimming. 
 
 - **Journey:** J-1
 - **IA page:** PG-1
-- **UI Design Prompt:** Not drafted yet.
+- **UI Design Prompt:** UIP-1, `.athanor/context/design/ui/building-access.md` (administrator screen).
 
 #### Dependencies
 
@@ -110,7 +110,7 @@ The QR code encodes the verify URL, `<origin><path>?p=<token>`, built from `wind
 
 - **Journey:** J-1
 - **IA page:** PG-1
-- **UI Design Prompt:** Not drafted yet.
+- **UI Design Prompt:** UIP-1, `.athanor/context/design/ui/building-access.md` (administrator screen).
 
 #### Dependencies
 
@@ -174,7 +174,7 @@ Entries are stored on one device only (E-4 Entry log, `.athanor/context/engineer
 
 - **Journey:** J-3
 - **IA page:** PG-2
-- **UI Design Prompt:** Not drafted yet.
+- **UI Design Prompt:** UIP-1, `.athanor/context/design/ui/building-access.md` (entry log screen).
 
 #### Dependencies
 
@@ -230,7 +230,7 @@ Open `#/log` with and without entries and check the **Export CSV** button.
 
 - **Journey:** J-3
 - **IA page:** PG-2
-- **UI Design Prompt:** Not drafted yet.
+- **UI Design Prompt:** UIP-1, `.athanor/context/design/ui/building-access.md` (entry log screen).
 
 #### Dependencies
 
@@ -287,7 +287,7 @@ The list lives in `src/data/blocklist.ts` and changes with a deploy (E-3 Blockli
 
 - **Journey:** J-4
 - **IA page:** Not applicable. No screen uses the blocklist yet.
-- **UI Design Prompt:** Not drafted yet.
+- **UI Design Prompt:** None. This story has no screen.
 
 #### Dependencies
 
@@ -343,7 +343,7 @@ Call `isBlocked` with a name that is in the list and one that is not.
 
 - **Journey:** J-2, J-4
 - **IA page:** Not applicable. No screen uses the blocklist yet.
-- **UI Design Prompt:** Not drafted yet.
+- **UI Design Prompt:** None. This story has no screen.
 
 #### Dependencies
 

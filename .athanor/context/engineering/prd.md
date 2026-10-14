@@ -97,12 +97,14 @@ The policy is applied in this order. It stops at the first failure. Each failure
 
 | Step | Check | Reason shown and logged when it fails |
 | --- | --- | --- |
-| 0 | The link has a token that can be read | No valid pass in this link |
+| 0 | The link has a token that can be read: two parts, and the payload decodes to a pass with every field of E-1 | No valid pass in this link |
 | 1 | Signature valid | Pass is not authentic |
 | 2 | Blocklist check (`isBlocked` on the visitor name). It overrides every later rule, including a valid pass. | Visitor is blocked |
 | 3a | `now` is not before `validFrom` | Pass is not valid yet |
 | 3b | `now` is not after `validUntil` (the end is included, D-1) | Pass has expired |
 | 4 | All checks passed | Pass is valid (granted) |
+
+A link with no `p` value is not a verify link: it opens the New pass page (PG-1). Verification needs no network call after the page has loaded: the whole check runs in the browser (R-8).
 
 `verifyPass(token, now, blocklist, publicKey)` is a pure function. Time is a parameter (ADR 0002). The verify page reads the clock once when it loads and passes it in. Side effects (log entry, screen) happen outside `verifyPass` (D-7). There are six reason texts in total.
 
@@ -168,7 +170,7 @@ Passes are signed, so the building, dates and visitor name cannot be edited. The
 ## Definition of Done (Increment-Level)
 
 - All in-scope `US-#` are merged to `dev` with their acceptance criteria verified, at every priority listed in scope and not just Must/P1.
-- No **Blocking** gap in `.athanor/docs/discovery-summary.md` remains unresolved for any in-scope feature or story.
+- No blocking gap remains in the context documents for any in-scope feature or story.
 - CI is green on the current `dev` head, and no findings above nit level are open on any in-scope PR. This is the same final bar `resolve-external-review` holds every PR to before human approval, not a lighter one for increment sign-off.
 - Every metric above has a measurement mechanism in place, though its target need not be hit yet.
 
@@ -181,7 +183,7 @@ These come from the discovery packet. Change them if wrong.
 
 ## Decisions
 
-These settle the points the discovery packet left unclear. Decided by the workshop facilitator in the product owner role, on 2026-10-14, taking the recommended (easy and logical) option each time. Change them if wrong.
+These settle the points the discovery packet left unclear. Decided by the product owner, on 2026-10-14, taking the recommended (easy and logical) option each time. Change them if wrong.
 
 - **D-1 End date is included.** A pass is valid from `validFrom` up to and including `validUntil`. A verification at exactly `validUntil` is granted. Reason: pass creation already accepts an end date equal to now (`src/domain/pass.ts`).
 - **D-2 No revoke feature.** A pass stops working when it expires. To stop a visitor sooner, the administrator adds the visitor's name to the blocklist (E-3). Guards cannot revoke. Reason: there is no server (ADR 0001), and the blocklist already overrides every pass.
@@ -192,6 +194,7 @@ These settle the points the discovery packet left unclear. Decided by the worksh
 - **D-7 One log entry per attempt, and what the screens show.** Every page load of the verify link, including a reload, appends one entry (`at` is the time the page read the clock when it loaded, see R-6; then `result` and `reason`). The entry also carries `passId`, `building` and `visitorName` whenever the signature was valid. It omits them when the token is missing, unreadable or has a bad signature, because those fields are not trusted. The granted screen shows ACCESS GRANTED, the reason, the building and the visitor name. A denied screen shows ACCESS DENIED and the reason only. All text is set with `textContent`.
 - **D-8 A pass with `validUntil` equal to `validFrom` is allowed.** With D-1 it is valid at exactly that instant. F-1 is not changed.
 - **D-9 Screens are tested with `jsdom`.** The verify screen test runs in the `jsdom` environment, set on that test file only with `// @vitest-environment jsdom` (`.athanor/context/engineering/tech-stack-and-repo-strategy.md`, Testing). `jsdom` version 26 is a `devDependency` and works on Node 20. Do not add any other dependency for F-3.
+- **D-10 The verify page does not check the building.** A guard phone has no sign-in and no building setting (NG-1), so any valid pass is granted on any guard phone. The granted screen shows the building so the guard can check that it is the right one.
 
 ## Risks
 

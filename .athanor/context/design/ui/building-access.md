@@ -80,7 +80,7 @@ Output format: not stated; assume static HTML/CSS and TypeScript, to match the s
 
 ## Generation Output
 
-Not generated yet.
+Not applicable. The app UI in `src/ui/` is built from this prompt.
 
 ## Implementation Notes
 
