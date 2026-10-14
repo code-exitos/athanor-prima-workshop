@@ -24,7 +24,13 @@ A resident creates a pass. The app signs it and shows a QR code that holds a lin
 
 ## Moving between checkpoints
 
-You start on `checkpoint-1`. After the personas prompt, go to `checkpoint-2`:
+You start on `checkpoint-1`. After the personas prompt, ask Claude to move you to `checkpoint-2`:
+
+```
+Commit my changes and switch to checkpoint 2.
+```
+
+Claude may ask permission to run the git commands. Read them, then say yes. If you prefer to do it yourself, type these in the terminal:
 
 ```bash
 git add -A && git commit -m "docs: personas"
