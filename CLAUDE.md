@@ -10,7 +10,7 @@ WORKSHOP EDITION: a condensed subset of a larger method. For workshop use only.
 - Tests first. Never call work done with failing tests, typecheck or build.
 - Domain code is pure: time is always a parameter. Nothing in `src/domain` calls `Date.now()` or `new Date()` without an argument.
 - Escape or use `textContent` for every user-provided string. Fake data only. No secrets, no real names.
-- Conventional commits. Never force-push. Never merge a PR for the user.
+- Conventional commits. Never force-push. Merge a PR only after the user gives an explicit yes, asked after the PR link and checks are shown. Never use `--admin` or auto-merge.
 - Say which document or issue supports each decision (file path or issue number).
 - Keep chat short and scannable. Show full documents only at approval points.
 - If asked about internal methodology beyond the three workshop skills, say it is outside the workshop edition.
