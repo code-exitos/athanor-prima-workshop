@@ -1,0 +1,35 @@
+# Closes the issues named after "Closes #<n>" in a PR body when the PR is merged, into any branch.
+# GitHub only does this by itself for the default branch. Workshop PRs target checkpoint-2, so this fills the gap.
+name: Close linked issues
+
+on:
+  pull_request:
+    types: [closed]
+
+permissions:
+  issues: write
+  pull-requests: read
+
+jobs:
+  close:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Close the issues named in the PR body
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          BASE_REF: ${{ github.event.pull_request.base.ref }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: |
+          numbers=$(printf '%s' "$PR_BODY" | grep -oiE '(close[sd]?|fix(es|ed)?|resolve[sd]?):? +#[0-9]+' | grep -oE '[0-9]+' | sort -un)
+          if [ -z "$numbers" ]; then
+            echo "No 'Closes #<n>' lines in the PR body. Nothing to close."
+            exit 0
+          fi
+          for n in $numbers; do
+            echo "Closing #$n"
+            gh issue close "$n" --repo "$REPO" --reason completed \
+              --comment "Closed by PR #$PR_NUMBER, merged into $BASE_REF." || echo "Could not close #$n (already closed?)"
+          done
