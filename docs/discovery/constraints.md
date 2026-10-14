@@ -15,7 +15,7 @@ date: 2026-09-09
 
 - No server at launch. The board does not want to run, secure, or pay for one.
 - The app must be able to be hosted as plain static files.
-- There is no IT staff in the residencial.
+- There is no IT staff in the community.
 
 ## Devices
 
@@ -31,5 +31,5 @@ date: 2026-09-09
 
 ## Language and accessibility
 
-- The first version is in English. Spanish may come later.
+- The first version is in English. Other languages may come later.
 - Some guards have poor eyesight. Text must be large and clear.

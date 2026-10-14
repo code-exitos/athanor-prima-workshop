@@ -1,7 +1,7 @@
 ---
 title: Problem statement and goals
 status: Approved
-owner: Product owner (Residencial Los Pinos board liaison)
+owner: Product owner (Tartan Fields board liaison)
 last_updated: 2026-10-14
 ---
 
@@ -9,7 +9,7 @@ last_updated: 2026-10-14
 
 ## Problem
 
-Guards at Residencial Los Pinos record visitors in a paper notebook. They often cannot confirm with a resident whether a visitor is expected. The notebook cannot be searched. The board cannot quickly see who entered, and cannot reliably stop banned people from entering.
+Guards at Tartan Fields record visitors in a paper notebook. They often cannot confirm with a resident whether a visitor is expected. The notebook cannot be searched. The board cannot quickly see who entered, and cannot reliably stop banned people from entering.
 
 ## Who is affected
 

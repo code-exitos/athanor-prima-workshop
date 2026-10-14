@@ -1,7 +1,7 @@
 ---
 title: Product vision and value proposition
 status: Approved
-owner: Product owner (Residencial Los Pinos board liaison)
+owner: Product owner (Tartan Fields board liaison)
 last_updated: 2026-10-14
 ---
 
@@ -9,7 +9,7 @@ last_updated: 2026-10-14
 
 ## Vision
 
-Every visitor to Residencial Los Pinos arrives with a pass their resident created, and every guard can trust a clear green or red answer at the gate.
+Every visitor to Tartan Fields arrives with a pass their resident created, and every guard can trust a clear green or red answer at the gate.
 
 ## Value proposition
 
