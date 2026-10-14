@@ -17,6 +17,18 @@ A resident creates a pass. The app signs it and shows a QR code that holds a lin
 
 The folders `.devcontainer/` and `.claude/` are **workshop infrastructure**. They set up GitHub Codespaces and the Claude Code skill used in the session. They are not part of the product.
 
+## Run it
+
+```bash
+npm install
+npm run dev        # http://localhost:5173
+npm run typecheck
+npm test           # runs once and exits
+npm run build
+```
+
+Routes: `#/` resident form, `#/log` entry log, `#/verify?p=<token>` verify page (not built yet on this branch).
+
 ## Getting started
 
 1. Click **Use this template**, then **Create a new repository**.
