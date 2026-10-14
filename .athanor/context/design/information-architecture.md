@@ -34,7 +34,7 @@ Status: Approved
 
 - **Purpose:** Show a guard the result of a pass check. Route `#/verify?p=<token>`. Audience: guard (P-2). Feature: F-3 (not built yet).
 - **Primary actions:** None. The guard only reads the result.
-- **Data shown:** Today, the verify page shows a panel with the placeholder "Verification is not implemented yet". After F-3, it shows a full-screen result with text, icon and reason.
+- **Data shown:** Today, the verify page shows a panel with the placeholder "Verification is not implemented yet". After F-3, it shows a full-screen result with text, icon and reason. Granted also shows the unit and alias, and for a one-time pass the line "One-time pass. It cannot be used again." Denied shows the reason only (`.athanor/context/engineering/prd.md`, R-6, D-7, D-9).
 
 ## Navigation Rules
 
@@ -60,7 +60,7 @@ Status: Approved
 
 - **Rendered on:** PG-3
 - **Sourced from:** E-1, E-2, E-3, E-4
-- **Key fields shown:** Not built yet. After F-3: result text, icon and reason.
+- **Key fields shown:** Not built yet. After F-3: result text, icon and reason, plus unit and alias when granted (D-9).
 
 ## Required States
 

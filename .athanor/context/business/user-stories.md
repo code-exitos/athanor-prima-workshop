@@ -235,7 +235,7 @@ The verify URL is built from `window.location.origin`, never a fixed host (R-3).
 
 ## F-3: Guard verifies a pass from the QR link
 
-No stories yet. To be specced as GitHub issues.
+No stories yet. To be specced as GitHub issues, in the three-story split planned in `.athanor/context/business/features.md` (F-3).
 
 ---
 

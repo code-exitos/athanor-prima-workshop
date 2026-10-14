@@ -121,7 +121,7 @@ sequenceDiagram
     G->>S: Grant or deny with a reason, write entry log
 ```
 
-The verification flow is not built yet. Order of checks: `prd.md` R-6. Time is a parameter: `verifyPass(token, now, ledger, blocklist, publicKey)` is a pure function (ADR 0002).
+The verification flow is not built yet. Order of checks, fixed reason texts and side effects: `prd.md` R-6 and D-6 to D-9. Time is a parameter: `verifyPass(token, now, ledger, blocklist, publicKey)` is a pure function (ADR 0002).
 
 ## Scaling Model
 
