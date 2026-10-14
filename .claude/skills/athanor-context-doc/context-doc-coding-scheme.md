@@ -28,7 +28,7 @@ it's just been applied narrowly until now.
 | `AC-#` | Acceptance Criterion | Nested under a `US-#`, numbered `AC-1`, `AC-2`, … starting over per story (pre-existing convention, unchanged) | Test files (`write-tests`), coverage-gap findings |
 | `CP-#` | Component Principle | `.athanor/context/design/brand-guidelines.md` | UI Design Prompt |
 | `PG-#` | Page | `.athanor/context/design/information-architecture.md` | UI Design Prompt, User Stories' Design/UX References |
-| `UIP-#` | UI Design Prompt (one per generation pass) | `.athanor/context/design/ui/<slug>.md` | User Stories' Design/UX References |
+| `UIP-#` | UI Design Prompt (one per generation pass) | `.athanor/context/design/ui-design-prompt.md` | User Stories' Design/UX References |
 | `C-#` | Infrastructure Component | `.athanor/context/engineering/infrastructure-architecture.md` | Data flows, `TASK-#` setup issues |
 | `SC-#` | Security & compliance control (one per control) | `.athanor/context/engineering/infrastructure-architecture.md` § Security & Compliance | PRD compliance NFR `R-#` (*Compliance source*), `security-reviewer` |
 | `E-#` | Entity | `.athanor/context/engineering/data-model.md` | `US-#` Technical Context, GitHub Feature issues' Key Entities |
@@ -50,11 +50,8 @@ it's just been applied narrowly until now.
   context set: `F-3` and `P-3` are unrelated items that happen to share a number, but two `P-#`s
   always mean two different personas.
 
-  The UI Design Prompt (`UIP-#`) is the one prefix that works differently: it's genuinely one
-  file *per generation pass* (`.athanor/context/design/ui/<slug>.md`), because each pass is tied to a
-  distinct run of an external generation tool, not a catalog entry like a persona or a feature.
-  Its sequence is tracked across every file under `.athanor/context/design/ui/`, the same way the
-  single-file prefixes track their sequence within one file.
+  The UI Design Prompt (`UIP-#`) lives in one file, `.athanor/context/design/ui-design-prompt.md`,
+  like the other single-file prefixes. Its sequence is tracked within that file.
 - **Reference by code, not by paraphrase.** "Implements: F-3" is checkable; "implements the
   checkout feature" is not, once the feature gets renamed. Every field in these templates that
   currently reads as a link or a section reference should carry the code when one exists.
