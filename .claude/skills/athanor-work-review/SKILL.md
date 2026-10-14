@@ -7,12 +7,12 @@ WORKSHOP EDITION: a condensed subset of a larger method. For workshop use only.
 
 # Work a feature, review it, open the PR
 
-Goal: all stories of one Feature built test-first on one branch, reviewed once or twice, then a PR the user can merge. Review lenses: [review-checklist.md](review-checklist.md).
+Goal: all stories of one Feature built test-first on one branch, reviewed once or twice, then a PR. You merge it only if the user says yes. Review lenses: [review-checklist.md](review-checklist.md).
 
 Rules for this skill:
 - Pin the target: `REPO=<owner>/<name>` from `git remote get-url origin`; `--repo "$REPO"` on every `gh` command; explicit `--base` and `--head` on the PR. Owner must equal `gh api user -q .login` or an org the user belongs to; otherwise STOP and tell the user to create their own copy from the template.
 - The approval in step 2 covers local commits only. The push and the PR need a separate yes in step 7, after the user has seen the title, body and review result.
-- Never close issues (the merge does). Never merge the PR. Never force-push.
+- Never close issues (the merge does). Never merge the PR without an explicit yes from the user (step 7). Never use `--admin` or auto-merge. Never force-push.
 - If an acceptance criterion is ambiguous or conflicts with a context doc or ADR: STOP, show the conflict, ask. Log the user's decision as an assumption comment on the issue.
 
 ## Steps
@@ -51,7 +51,8 @@ Apply `review-checklist.md` to `git diff origin/<base>...HEAD`. Report findings,
 2. `git push -u origin <branch>`, then `gh pr create --repo "$REPO" --base <base> --head <branch> --title "<title>" --body-file <file>`.
 3. Body: Summary; `Closes #<parent>` and `Closes #<story>` per story; AC traceability table; test results; review summary and finding status; decisions and assumptions; how to demo (`npm run dev`, route, steps).
 4. Say: GitHub auto-closes issues only when a PR merges into the DEFAULT branch. In workshop copies the default is `checkpoint-1` and this PR targets `checkpoint-2`, so offer to close the issues by hand after the user merges.
-5. Never merge. Print the PR URL, then `gh pr checks <n> --repo "$REPO"`.
+5. Print the PR URL, then `gh pr checks <n> --repo "$REPO"`.
+6. Ask: "Merge this PR into `<base>`?" Merge only after an explicit yes in the user's next message, with `gh pr merge <n> --repo "$REPO" --merge`. Do not merge if checks fail or a Critical or High finding is open: say why and stop. If the user says no or does not answer, leave the PR open. After a merge, offer to close the issues by hand (item 4).
 
 ### 8. Wrap up
 Tell the user how to demo the feature (`npm run dev`, open the verify link) and what remains.
